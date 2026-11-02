@@ -22,8 +22,8 @@ x_t\to0&amp;\iff |1-\eta\lambda|&lt;1\\
 <p>Rather than tuning LR $\eta=\frac{2}{\lambda}$, the curvature widens just enough to accommodate whatever LR the hyperparameters specify: $\lambda=\frac{2}{\eta}$</p>
 </div></div></div><div class="asset-row" data-row-id="row-2"></div><div class="asset-row inserted-row" data-row-id="text-839ff9dd-2f58-4145-b875-1f24e10a138d"><div class="text-block" data-text-style="subsection" id="heading-text-839ff9dd-2f58-4145-b875-1f24e10a138d" data-block="text-839ff9dd-2f58-4145-b875-1f24e10a138d"><div class="rendered"><h3>the self-stabilization mechanism</h3></div></div></div><div class="asset-row inserted-row" data-row-id="text-11c24a3c-5e91-4412-b756-85217202e178"><div class="text-block" data-text-style="paragraph" data-block="text-11c24a3c-5e91-4412-b756-85217202e178"><div class="rendered"><p>Damian et al (2023) found that Hessian sharpness in constant-LR SGD evolves in 4 phases:</p>
 <ol>
-<li><strong>Progressive sharpening</strong>, where $\lambda$ rises up to its equilibrium value $\frac{2}{\lambda}$.</li>
-<li><strong>Blowup</strong>, where $\lambda &gt; \frac{2}{\lambda}$ induces oscillations along the principal Hessian eigenvector.</li>
+<li><strong>Progressive sharpening</strong>, where $\lambda$ rises up to its equilibrium value $\frac{2}{\eta}$.</li>
+<li><strong>Blowup</strong>, where $\lambda &gt; \frac{2}{\eta}$ induces oscillations along the principal Hessian eigenvector.</li>
 <li><strong>Self-stabilization</strong>, where 3rd order loss dynamics pull sharpness back to its equilibrium value; oscillations continue to excite.</li>
 <li><strong>Return to stability</strong>, where oscillations along the principal Hessian eigenvector finally die out after sharpness re-equilibrates.</li>
 </ol>
