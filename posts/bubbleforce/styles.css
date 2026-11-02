@@ -139,3 +139,12 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 @container(max-width:560px){.mystery-tiles{grid-template-columns:minmax(0,1fr)}.mystery-tile-stack:last-child{grid-column:auto}}
 
 .astronomy-row{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px}.astronomy-images{display:grid;grid-template-columns:1fr 1.8fr;align-items:center;gap:6px;padding:10px;background:#000;border-radius:4px}.astronomy-images a{min-width:0;color:#c6d8df;text-align:center;text-decoration:none;font:10px/1.4 var(--sans)}.astronomy-images img{width:100%;height:auto;border-radius:0;background:#000}.astronomy-images span{display:block;padding-top:5px}.astronomy-row .caption{font-size:10px;line-height:1.5}@media(max-width:800px){.astronomy-row{grid-template-columns:minmax(0,1fr)}.astronomy-row>.figure{width:100%;max-width:440px;justify-self:center}}
+
+/* Figure 6 shares its heading row, keeping equations and complex planes aligned. */
+[data-row-id="row-13"] .roots-with-text{row-gap:8px}
+[data-row-id="row-13"] .root-card{display:grid;grid-template-rows:subgrid;grid-row:span 2;align-self:stretch}
+[data-row-id="row-13"] .root-card-heading h3{min-height:0;margin:0}
+[data-row-id="row-13"] .root-kernel-note{margin:4px 0 0;text-align:center;color:var(--muted)}
+[data-row-id="row-13"] .root-kernel-note .rendered{font-size:10px;line-height:1.35}
+[data-row-id="row-13"] .root-kernel-note p{margin:0}
+[data-row-id="row-13"] .root-card>iframe,[data-row-id="row-13"] .root-card>.media-player{align-self:start}
