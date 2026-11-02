@@ -1,0 +1,17 @@
+'use strict';
+(()=>{
+ const $=id=>document.getElementById(id),video=$('video'),poster=$('poster'),seek=$('seek'),status=$('status'),play=$('toggle-play'),cache=new Map();
+ let slides=[],index=0,generation=0;
+ const clock=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+ function report(){parent.postMessage({type:'aipom-height',height:Math.ceil(document.querySelector('.player').getBoundingClientRect().height+2*parseFloat(getComputedStyle(document.body).paddingTop))},location.origin)}
+ function update(){const d=Number.isFinite(video.duration)?video.duration:0;seek.disabled=!d;seek.max=d||1;seek.value=video.currentTime;play.textContent=video.paused?(video.ended?'Replay':'Play'):'Pause';$('time').textContent=`${clock(video.currentTime)} / ${clock(d)}`}
+ async function clip(url){if(!cache.has(url))cache.set(url,fetch(url,{credentials:'same-origin'}).then(async r=>{if(!r.ok)throw Error('Video unavailable');return URL.createObjectURL(await r.blob())}).catch(e=>{cache.delete(url);throw e}));return cache.get(url)}
+ async function show(i){if(!slides.length)return;const token=++generation;index=Math.max(0,Math.min(slides.length-1,i));const s=slides[index];video.pause();poster.src=s.poster;poster.hidden=false;status.hidden=true;play.disabled=true;seek.disabled=true;$('prev').disabled=index===0;$('next').disabled=index===slides.length-1;$('slide-count').textContent=`${index+1} / ${slides.length}`;video.setAttribute('aria-label',s.title||`Slide ${index+1}`);document.querySelector('.stage').style.aspectRatio=`${s.width||2160}/${s.height||1000}`;report();
+  try{const src=await clip(s.video);if(token!==generation)return;video.src=src;video.load();await new Promise((resolve,reject)=>{video.addEventListener('loadedmetadata',resolve,{once:true});video.addEventListener('error',reject,{once:true})});if(token!==generation)return;video.currentTime=0;play.disabled=false;seek.disabled=false;await video.play();if(token!==generation)return;poster.hidden=true;update();report()}catch{if(token===generation){status.textContent='Tap Replay to load this slide.';status.hidden=false;play.disabled=false}}
+ }
+ $('prev').onclick=()=>show(index-1);$('next').onclick=()=>show(index+1);$('replay').onclick=()=>show(index);play.onclick=()=>{if(!video.src){show(index);return}if(video.paused){if(video.ended)video.currentTime=0;video.play().catch(()=>show(index))}else video.pause()};seek.oninput=()=>{if(Number.isFinite(video.duration))video.currentTime=Number(seek.value)};
+ $('fullscreen').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else document.querySelector('.player').requestFullscreen?.()};
+ ['loadedmetadata','timeupdate','play','pause','ended','seeked'].forEach(name=>video.addEventListener(name,update));video.controls=false;video.loop=false;new ResizeObserver(report).observe(document.querySelector('.player'));
+ document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.target.closest('button,input'))return;if(e.key==='ArrowLeft'){e.preventDefault();show(index-1)}if(e.key==='ArrowRight'){e.preventDefault();show(index+1)}});
+ fetch('slides.json?v=font-seams-fixed').then(r=>{if(!r.ok)throw Error('Slides unavailable');return r.json()}).then(data=>{slides=data.slides||data;window.aipomPlayer={get step(){return index},get count(){return slides.length},show};show(0)}).catch(()=>{status.textContent='Slides could not load. Reload to retry.';status.hidden=false});
+})();

@@ -1,0 +1,78 @@
+{
+  "version": 57,
+  "width": 1080,
+  "height": 1352,
+  "fps": 24,
+  "slides": [
+    {
+      "id": "trajectory",
+      "title": "Momentum changes the checkpoint trajectory",
+      "duration": 6.0,
+      "source_range": [
+        0.0,
+        2.6
+      ],
+      "video": "trajectory.mp4?v=font-seams-fixed",
+      "poster": "trajectory.webp?v=font-seams-fixed",
+      "frames": 144,
+      "width": 1080,
+      "height": 1352
+    },
+    {
+      "id": "perturb",
+      "title": "Perturb one checkpoint",
+      "duration": 9.0,
+      "source_range": [
+        2.6,
+        9.0
+      ],
+      "video": "perturb.mp4?v=font-seams-fixed",
+      "poster": "perturb.webp?v=font-seams-fixed",
+      "frames": 216,
+      "width": 1080,
+      "height": 1352
+    },
+    {
+      "id": "arbitrary",
+      "title": "An arbitrary perturbation",
+      "duration": 7.0,
+      "source_range": [
+        9.0,
+        14.0
+      ],
+      "video": "arbitrary.mp4?v=font-seams-fixed",
+      "poster": "arbitrary.webp?v=font-seams-fixed",
+      "frames": 168,
+      "width": 1080,
+      "height": 1352
+    },
+    {
+      "id": "resonance",
+      "title": "Resonance with momentum",
+      "duration": 10.5,
+      "source_range": [
+        14.0,
+        20.8
+      ],
+      "video": "resonance.mp4?v=font-seams-fixed",
+      "poster": "resonance.webp?v=font-seams-fixed",
+      "frames": 252,
+      "width": 1080,
+      "height": 1352
+    },
+    {
+      "id": "growth",
+      "title": "Exponential amplification",
+      "duration": 6.0,
+      "source_range": [
+        20.8,
+        24.5
+      ],
+      "video": "growth.mp4?v=font-seams-fixed",
+      "poster": "growth.webp?v=font-seams-fixed",
+      "frames": 144,
+      "width": 1080,
+      "height": 1352
+    }
+  ]
+}
