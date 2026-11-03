@@ -12,6 +12,25 @@ Equations, videos, slide navigation, and root-locus visualizations run locally f
 
 Snapshot provenance is recorded in `publication.json`. The same publication is included in the author's personal website at `posts/bubbleforce/`.
 
+## Private commit previews
+
+The separate owner-private preview is hosted at
+https://bubbleforce-commit-preview.jeff-s-cheng.chatgpt.site/.
+Ask the agent to **preview `<commit SHA or branch>`**. It exports that exact
+commit and deploys it to the preview Site; the personal website is unchanged.
+`/_preview.json` records which commit is currently displayed. Only the owner
+can open this preview, using the same ChatGPT account.
+
+To prepare a snapshot without publishing:
+
+```sh
+python tools/export-preview.py COMMIT_OR_BRANCH /absolute/path/to/preview/dist
+```
+
+The export does not switch branches or copy uncommitted changes. Sites
+publication uses a separate hosting checkout; no hosting credentials are kept
+in this repository. The preview URL displays the latest deployed snapshot.
+
 ## Third-party materials
 
 - MathJax is distributed under Apache-2.0; see `vendor/mathjax/LICENSE`.

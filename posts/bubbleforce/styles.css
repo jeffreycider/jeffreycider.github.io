@@ -112,9 +112,9 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 .rendered ol>li::marker{color:#77736e;font-variant-numeric:tabular-nums}
 .rendered ol>li>p:last-child{margin-bottom:0}
 /* Hyperparameter shocks, in the author's reading order. */
-[data-edit="text-484823c6-8193-43b9-b44f-32c651782bdb"] .rendered>ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;padding:0;margin:1em 0}
-[data-edit="text-484823c6-8193-43b9-b44f-32c651782bdb"] .rendered>ul>li{background:#f0efec;border:1px solid #e2e0db;border-radius:4px;padding:.65em .85em;margin:0}
-[data-edit="text-484823c6-8193-43b9-b44f-32c651782bdb"] .rendered>ul>li>p:last-child{margin-bottom:0}
+[data-block="text-484823c6-8193-43b9-b44f-32c651782bdb"] .rendered>ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;padding:0;margin:1em 0}
+[data-block="text-484823c6-8193-43b9-b44f-32c651782bdb"] .rendered>ul>li{background:#f0efec;border:1px solid #e2e0db;border-radius:4px;padding:.65em .85em;margin:0}
+[data-block="text-484823c6-8193-43b9-b44f-32c651782bdb"] .rendered>ul>li>p:last-child{margin-bottom:0}
 .root-kernel-note{margin:10px 0 0;line-height:1.45}
 
 /* Definition cards retain their purple styling in the footnote column. */
@@ -148,3 +148,53 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 [data-row-id="row-13"] .root-kernel-note .rendered{font-size:10px;line-height:1.35}
 [data-row-id="row-13"] .root-kernel-note p{margin:0}
 [data-row-id="row-13"] .root-card>iframe,[data-row-id="row-13"] .root-card>.media-player{align-self:start}
+
+/* AI-authored prose marked for the authors to review. */
+.ai-authored{color:#b3261e}
+.ai-authored mjx-container{color:var(--ink)}
+
+/* Manuscript subtitle and copyable bibliographic citation. */
+.masthead .subtitle{font:normal clamp(20px,2.2vw,28px)/1.3 var(--serif);letter-spacing:0;margin:-8px 0 24px;color:var(--ink)}
+.citation{border-top:1px solid var(--rule);padding-top:24px}
+.citation-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+.citation-heading h2{margin:0;font:normal 24px/1.2 var(--serif);letter-spacing:0}
+.citation-heading button{border:1px solid var(--rule);border-radius:5px;padding:9px 13px;background:var(--paper);color:var(--ink);font:13px/1.3 var(--sans);cursor:pointer;flex-shrink:0}
+.citation-heading button:hover{background:#f0ece5}
+.citation-heading button:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.citation-code{margin:0;padding:20px;border:1px solid var(--rule);border-radius:6px;background:#f3f0e9;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere;cursor:copy;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
+.citation-code code{font:inherit}
+#citation-status{min-height:1.5em;margin:8px 0 0;font:12px/1.5 var(--sans);color:var(--muted)}
+@media(max-width:700px){.citation-code{padding:14px;font-size:12px}}
+
+/* Five momentum examples share one aligned row of complex planes. */
+[data-row-id="row-13"] .roots-with-text{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+[data-row-id="row-13"] .root-card-heading{align-self:end}
+[data-row-id="row-13"] .root-card-heading h3{font-size:13px;line-height:1.35}
+[data-row-id="row-16"] .example-row{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+[data-row-id="row-qhm-kernel"]>.statement{width:calc((100% - 24px)/2)}
+@media(max-width:700px){[data-row-id="row-qhm-kernel"]>.statement{width:100%}}
+@media(max-width:1100px){[data-row-id="row-13"] .roots-with-text{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){[data-row-id="row-13"] .roots-with-text,[data-row-id="row-16"] .example-row{grid-template-columns:minmax(0,1fr)}}
+
+/* Small, numbered paper tiles for the stability boundaries. */
+.rendered ol.tiled-enumeration{display:grid;gap:12px;padding:0;list-style:none;counter-reset:tile;margin:1.1em 0}
+.rendered ol.tiled-enumeration>li{counter-increment:tile;position:relative;margin:0;padding:12px 14px 12px 38px;min-width:0}
+.rendered ol.tiled-enumeration>li::before{content:counter(tile) ".";position:absolute;left:14px;top:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.stability-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+.central-flows-row{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+.central-flows-text>[data-block="central-flows-commentary"]{margin-top:20px}
+/* Example 3 and Figure 3 share the right column of the overview. */
+.overview-mosaic{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px;align-items:start}
+.overview-mosaic>[data-row-id="row-qhm-kernel"]{grid-column:2;grid-row:1;margin:0}
+.overview-mosaic>[data-row-id="row-qhm-kernel"]>.statement{width:100%;margin:0}
+.overview-mosaic>[data-block="video-text-2"]{grid-column:1;grid-row:1 / span 2;min-width:0}
+.overview-mosaic>.figure{grid-column:2;grid-row:2;margin:0;min-width:0}
+.overview-mosaic .player-frame{height:420px}
+.pathspring-examples-stack{display:grid;gap:18px;min-width:0}
+.pathspring-examples-stack>.statement,.pathspring-examples-stack>.asset-row{margin:0}
+.pathspring-examples-stack>.asset-row>.statement{margin:0}
+@media(max-width:700px){
+ .stability-tiles{grid-template-columns:minmax(0,1fr)}
+ .central-flows-row,.overview-mosaic{grid-template-columns:minmax(0,1fr)}
+ .overview-mosaic>[data-row-id="row-qhm-kernel"],.overview-mosaic>[data-block="video-text-2"],.overview-mosaic>.figure{grid-column:1;grid-row:auto}
+}

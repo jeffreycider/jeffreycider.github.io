@@ -1,5 +1,24 @@
 /* Read-only manuscript: math, marginal notes, and media controls. */
 (()=>{'use strict';
+const citation=document.getElementById('bibtex'),copyCitation=document.getElementById('copy-citation'),citationStatus=document.getElementById('citation-status');
+if(citation&&copyCitation){
+ let resetCopy;
+ const copy=async()=>{
+  let copied=false;
+  try{await navigator.clipboard.writeText(citation.textContent);copied=true}catch{
+   const range=document.createRange();range.selectNodeContents(citation);
+   const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);
+   try{copied=document.execCommand('copy')}catch{}
+   if(copied)selection.removeAllRanges();
+  }
+  clearTimeout(resetCopy);
+  copyCitation.textContent=copied?'Copied!':'Copy BibTeX';
+  citationStatus.textContent=copied?'BibTeX copied to clipboard.':'Citation selected. Use your browser’s Copy command.';
+  if(copied)resetCopy=setTimeout(()=>{copyCitation.textContent='Copy BibTeX';citationStatus.textContent='Tap the citation to copy.'},2500);
+ };
+ copyCitation.addEventListener('click',copy);
+ citation.closest('pre').addEventListener('click',()=>{if(!window.getSelection().toString())copy()});
+}
 const flow=document.querySelector('.paper-flow'),noteColumn=document.querySelector('.footnote-column'),columns=document.querySelector('.manuscript-columns');
 const footnoteNodes=[...document.querySelectorAll('.marginal-note')];let noteFrame=0;
 function fitDisplayMath(){
