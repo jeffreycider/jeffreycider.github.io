@@ -171,7 +171,7 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 [data-row-id="row-13"] .root-card-heading{align-self:end}
 [data-row-id="row-13"] .root-card-heading h3{font-size:13px;line-height:1.35}
 [data-row-id="row-16"] .example-row{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
-[data-row-id="row-qhm-kernel"]>.statement{width:calc((100% - 24px)/2)}
+[data-row-id="row-qhm-kernel"]>.statement{width:calc((100% - 24px)/2);margin-left:auto;margin-right:0}
 @media(max-width:700px){[data-row-id="row-qhm-kernel"]>.statement{width:100%}}
 @media(max-width:1100px){[data-row-id="row-13"] .roots-with-text{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:700px){[data-row-id="row-13"] .roots-with-text,[data-row-id="row-16"] .example-row{grid-template-columns:minmax(0,1fr)}}
@@ -183,12 +183,10 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 .stability-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
 .central-flows-row{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
 .central-flows-text>[data-block="central-flows-commentary"]{margin-top:20px}
-/* Example 3 and Figure 3 share the right column of the overview. */
+/* Overview prose and Figure 3 share one row. */
 .overview-mosaic{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px;align-items:start}
-.overview-mosaic>[data-row-id="row-qhm-kernel"]{grid-column:2;grid-row:1;margin:0}
-.overview-mosaic>[data-row-id="row-qhm-kernel"]>.statement{width:100%;margin:0}
-.overview-mosaic>[data-block="video-text-2"]{grid-column:1;grid-row:1 / span 2;min-width:0}
-.overview-mosaic>.figure{grid-column:2;grid-row:2;margin:0;min-width:0}
+.overview-mosaic>[data-block="video-text-2"]{grid-column:1;grid-row:1;min-width:0}
+.overview-mosaic>.figure{grid-column:2;grid-row:1;margin:0;min-width:0}
 .overview-mosaic .player-frame{height:420px}
 .pathspring-examples-stack{display:grid;gap:18px;min-width:0}
 .pathspring-examples-stack>.statement,.pathspring-examples-stack>.asset-row{margin:0}
@@ -196,7 +194,7 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 @media(max-width:700px){
  .stability-tiles{grid-template-columns:minmax(0,1fr)}
  .central-flows-row,.overview-mosaic{grid-template-columns:minmax(0,1fr)}
- .overview-mosaic>[data-row-id="row-qhm-kernel"],.overview-mosaic>[data-block="video-text-2"],.overview-mosaic>.figure{grid-column:1;grid-row:auto}
+ .overview-mosaic>[data-block="video-text-2"],.overview-mosaic>.figure{grid-column:1;grid-row:auto}
 }
 
 /* Section and subsection strips span the manuscript content column. */
