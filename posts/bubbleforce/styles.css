@@ -171,8 +171,6 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 [data-row-id="row-13"] .root-card-heading{align-self:end}
 [data-row-id="row-13"] .root-card-heading h3{font-size:13px;line-height:1.35}
 [data-row-id="row-16"] .example-row{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
-[data-row-id="row-qhm-kernel"]>.statement{width:calc((100% - 24px)/2);margin-left:auto;margin-right:0}
-@media(max-width:700px){[data-row-id="row-qhm-kernel"]>.statement{width:100%}}
 @media(max-width:1100px){[data-row-id="row-13"] .roots-with-text{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:700px){[data-row-id="row-13"] .roots-with-text,[data-row-id="row-16"] .example-row{grid-template-columns:minmax(0,1fr)}}
 
@@ -213,3 +211,12 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
  .paper-flow h3.heading-strip{font-size:21px;padding:11px 16px}
  .citation-heading button{right:12px}
 }
+
+/* Each momentum example pairs its kernel with its stability boundary. */
+.momentum-example-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:stretch}
+.momentum-example-pair>.statement{min-width:0;margin:0;padding:22px}
+.momentum-example-pair .kernel-example-layout{grid-template-columns:minmax(0,1fr) 170px;gap:16px;min-height:150px}
+.momentum-example-pair .kernel-stability{margin-top:18px}
+.momentum-example-pair .kernel-stability .rendered>p:last-child{margin-bottom:0}
+@media(max-width:900px){.momentum-example-pair .kernel-example-layout{grid-template-columns:minmax(0,1fr) 135px;gap:10px}}
+@media(max-width:700px){.momentum-example-pair{grid-template-columns:minmax(0,1fr)}.momentum-example-pair .kernel-example-layout{min-height:0}.momentum-example-pair>.statement{padding:18px}}
