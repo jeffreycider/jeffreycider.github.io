@@ -220,3 +220,9 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 .momentum-example-pair .kernel-stability .rendered>p:last-child{margin-bottom:0}
 @media(max-width:900px){.momentum-example-pair .kernel-example-layout{grid-template-columns:minmax(0,1fr) 135px;gap:10px}}
 @media(max-width:700px){.momentum-example-pair{grid-template-columns:minmax(0,1fr)}.momentum-example-pair .kernel-example-layout{min-height:0}.momentum-example-pair>.statement{padding:18px}}
+
+/* Balance the derivation with the two Aipom figures. */
+[data-row-id="row-8"]>.video-row{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:center}
+[data-row-id="row-9"]>.video-row{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start}
+.resonance-text-stack{min-width:0;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}.resonance-text-stack>*{min-width:0}
+@media(max-width:900px){[data-row-id="row-8"]>.video-row,[data-row-id="row-9"]>.video-row{grid-template-columns:minmax(0,1fr)}}

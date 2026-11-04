@@ -6,4 +6,8 @@ header{font-size:14px}#step-count{font-size:11px}button{font-size:13px}.seek-row
 
 header{gap:18px;align-items:start;font:14px/1.4 Georgia,serif}header>span:first-child{max-width:85%}#step-count{flex:none}
 
-.cel-review{display:flex;align-items:center;justify-content:center;gap:14px;margin:6px 0 14px;font:14px Georgia,serif}.cel-review[hidden]{display:none}.cel-review button{padding:5px 10px;font:inherit;border:1px solid #9d909f;background:#fffaf3;color:#44394b;border-radius:4px}.cel-review output{min-width:100px;text-align:center;font-variant-numeric:tabular-nums}.cel-review button:disabled{opacity:.35}
+
+#fullscreen{flex:none;font:20px/1 Arial,sans-serif;min-height:30px;padding:4px 8px;border-width:1px;border-radius:4px}header>span:first-child{flex:1}header{gap:10px;align-items:center}
+.player:fullscreen{background:#e9e7ec;width:100vw;height:100vh;display:flex;flex-direction:column;padding:12px;overflow:auto}
+.player:fullscreen .stage{flex:1;min-height:0;aspect-ratio:auto}
+.player:fullscreen header,.player:fullscreen nav,.player:fullscreen .seek-row{flex:none}
