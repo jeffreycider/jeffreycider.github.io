@@ -137,12 +137,12 @@ M_t(\nabla L(W))
 <p>$$\boxed{\script{T}(W):=A\!\left(M_t(\nabla L(W))\right)}.$$</p>
 <p>Thus $W_{t+1}=W_t-\eta\script{T}(W_t)$.</p>
 </div></div></section></div><figure class="figure"><video aria-label="**Figure 7b · Restoring force · eigenvectors · springs.** Align the perturbation with an eigenvector." muted="" playsinline="" poster="./media/aipom-restoring-force-r73-poster.webp?v=font-repair" preload="none"><source src="./media/aipom-restoring-force-r73.mp4?v=font-repair" type="video/mp4"></video><div class="caption">Figure 7b</div></figure></div></div><div class="asset-row inserted-row" data-row-id="text-8cc2e669-8cd7-470a-9af8-268e32793215"><div class="text-block" data-text-style="paragraph" data-block="text-8cc2e669-8cd7-470a-9af8-268e32793215"><div class="rendered"><p>A small artificial weight displacement $\delta W_t$ changes the update by</p>
-<p>$$\delta(\text{update})\approx-\eta{\color{red}{c_0}}\times
-\underbrace{\color{red}{\script{J}_A(M_t)H(W_t)}}_{\color{teal}{\text{Hooke's constant}}}\times
+<p>$$\delta(\text{update})\approx-\eta\times
+\underbrace{\color{teal}{\script{J}_{\script{T}}(W_t)}}_{\color{teal}{\text{Hooke's constant}}}\times
 \underbrace{\color{purple}{\delta W_t}}_{\color{purple}{\text{Spring displacement}}}.$$</p>
-<p>Each Jacobian eigenvector yanks the perturbed trajectory back to the original <strong>path</strong> with a <strong>spring</strong>-like force.  Some eigenvectors are stiff springs, others are soft springs.  We call the Hooke's constant of the stiffest eigenvector-spring the <strong>pathspring</strong>.</p>
-</div></div></div><div class="asset-row" data-row-id="row-21"><div class="video-row pathspring-row"><div class="pathspring-definition-stack"><section class="statement definition"><div class="statement-heading"><strong>Definition 6.</strong> (Pathspring)</div><div class="text-block" data-text-style="paragraph" data-block="video-text-5"><div class="rendered"><p class="ai-authored unit-sum-review">The <strong>pathspring</strong> is the largest positive real eigenvalue:</p>
-<p class="ai-authored unit-sum-review">$$\boxed{\zeta_t=\lambda_{\max}^{+}\!\left(\script{J}_A(M_t)\,H(W_t)\right)}.$$</p>
+<p>Each Jacobian eigenvector yanks the perturbed trajectory back to the original <strong>path</strong> with a <strong>spring</strong>-like force.  Some eigenvectors are stiff springs, others are soft springs.  We call the Hooke's constant of the stiffest eigenvector-spring<span class="ai-authored unit-sum-review">, divided by $c_0$,</span> the <strong>pathspring</strong>.</p>
+</div></div></div><div class="asset-row" data-row-id="row-21"><div class="video-row pathspring-row"><div class="pathspring-definition-stack"><section class="statement definition"><div class="statement-heading"><strong>Definition 6.</strong> (Pathspring)</div><div class="text-block" data-text-style="paragraph" data-block="video-text-5"><div class="rendered"><p class="ai-authored unit-sum-review">For $c_0&gt;0$, the <strong>pathspring</strong> is the largest positive real eigenvalue:</p>
+<p class="ai-authored unit-sum-review">$$\boxed{\zeta_t=\lambda_{\max}^{+}\!\left(\frac{\script{J}_{\script{T}}(W_t)}{c_0}\right)}.$$</p>
 </div></div></section><div class="text-block" data-text-style="paragraph" data-block="text-91b671d8-5fdd-4967-a837-9ed927a01aeb"><div class="rendered"><p>We want to show that pathspring forms a similar bubbleforce equilibrium to Conjecture 1's.  We'd also like a numerical method for computing pathspring.  A chain-rule expansion of the optimizer operator Jacobian is helpful for both.</p>
 </div></div></div><figure class="figure"><video aria-label="**Figure 7c · Infinitesimal spring stiffness · pathspring.** Shrink the perturbation to measure the local response." muted="" playsinline="" poster="./media/aipom-pathspring-r73-poster.webp?v=font-repair" preload="none"><source src="./media/aipom-pathspring-r73.mp4?v=font-repair" type="video/mp4"></video><div class="caption">Figure 7c</div></figure></div></div><div class="asset-row" data-row-id="row-pathspring-chain"><section class="statement example"><div class="statement-heading"><strong>Example 6.</strong> (Chain-rule expansion of Muon's optimizer operator)</div><div class="text-block" data-text-style="paragraph" data-block="pathspring-chain-rule"><div class="rendered"><p>Muon uses the polar factor $A(M)=\operatorname{msign}(M):=UV^\top$, where $M=U\Sigma V^\top$ is a thin SVD. Let $W$ contain the Muon weights, with Adam weights held fixed.</p>
 <p>The Muon optimizer operator is $\script{T}(W)=\operatorname{msign}\!\left(M_t(\nabla L(W))\right)$.</p>
@@ -166,13 +166,13 @@ $$\begin{align*}
 \\[0.5em]\hline\\[-0.5em]
 \delta W_{t+1}&amp;\simeq&amp;\delta W_t-\eta\,\mathcal J_{\operatorname{msign}}(M_t)[\delta M_t].
 \end{array}$$</p>
-<p>Here $\delta M_t\simeq\sum_i c_iH(W_{t-i})\,\delta W_{t-i}$. With the local Hessian and Muon Jacobian fixed, a perturbation along an eigenmode of <span class="ai-authored unit-sum-review">$\script{J}_{\operatorname{msign}}(M_t)H(W_t)$</span> obeys</p>
+<p>Here $\delta M_t\simeq\sum_i c_iH(W_{t-i})\,\delta W_{t-i}$. With the local Hessian and Muon Jacobian fixed, a perturbation along an eigenmode of <span class="ai-authored unit-sum-review">$\script{J}_{\script{T}}(W_t)/c_0$</span> obeys</p>
 <p>$$\boxed{\delta W_{t+1}\simeq\delta W_t-\eta\zeta_t\sum_ic_i\delta W_{t-i}}.$$</p>
 <p>This frozen linear recurrence has the same characteristic polynomial as SGD, with $\eta\lambda$ replaced by $\eta\zeta_t$, so the proof for Theorem 2 can be applied without loss of generality.</p>
 </div></div></section><div class="pathspring-examples-stack"><section class="statement example"><div class="text-block statement-heading" data-block="pathspring-numerical-title" data-text-style="paragraph"><div class="rendered"><p><strong>Example 7.</strong> (Numerical method for pathspring $\zeta$ computation)</p>
-</div></div><div class="text-block" data-block="pathspring-numerical-method" data-text-style="paragraph"><div class="rendered"><p><span class="ai-authored unit-sum-review">We compute $\zeta$ using Arnoldi iteration on the implicit operator $\script{J}_A(M_t)H(W_t)$.</span></p>
+</div></div><div class="text-block" data-block="pathspring-numerical-method" data-text-style="paragraph"><div class="rendered"><p><span class="ai-authored unit-sum-review">We compute $\zeta$ using Arnoldi iteration on the implicit operator $\script{J}_{\script{T}}(W_t)/c_0$.</span></p>
 <p>These can be decomposed into an HVP and then JVP.<sup class="footnote-ref" id="footnote-ref-9"><a aria-label="Footnote q" href="#footnote-9">q</a></sup></p>
-<p>$${\color{red}{\script{J}_A(M_t)H(W_t)v}}
+<p>$${\color{red}{\frac{\script{J}_{\script{T}}(W_t)v}{c_0}}}
 =\underbrace{\script{J}_{\operatorname{msign}}(M_t)\!\left[
 \underbrace{H(W_t)v}_{\color{red}{\text{HVP}}}
 \right]}_{\color{red}{\text{JVP}}}.$$</p>
