@@ -12,8 +12,8 @@
         0.0,
         2.6
       ],
-      "video": "trajectory.mp4?v=unit-sum1",
-      "poster": "trajectory.webp?v=unit-sum1",
+      "video": "trajectory.mp4?v=math-axes1",
+      "poster": "trajectory.webp?v=math-axes1",
       "frames": 144,
       "width": 1080,
       "height": 1352
@@ -26,8 +26,8 @@
         2.6,
         9.0
       ],
-      "video": "perturb.mp4?v=unit-sum1",
-      "poster": "perturb.webp?v=unit-sum1",
+      "video": "perturb.mp4?v=math-axes1",
+      "poster": "perturb.webp?v=math-axes1",
       "frames": 216,
       "width": 1080,
       "height": 1352
@@ -40,8 +40,8 @@
         9.0,
         14.0
       ],
-      "video": "arbitrary.mp4?v=unit-sum1",
-      "poster": "arbitrary.webp?v=unit-sum1",
+      "video": "arbitrary.mp4?v=math-axes1",
+      "poster": "arbitrary.webp?v=math-axes1",
       "frames": 168,
       "width": 1080,
       "height": 1352
@@ -54,8 +54,8 @@
         14.0,
         20.8
       ],
-      "video": "resonance.mp4?v=unit-sum1",
-      "poster": "resonance.webp?v=unit-sum1",
+      "video": "resonance.mp4?v=math-axes1",
+      "poster": "resonance.webp?v=math-axes1",
       "frames": 252,
       "width": 1080,
       "height": 1352
@@ -68,8 +68,8 @@
         20.8,
         24.5
       ],
-      "video": "growth.mp4?v=unit-sum1",
-      "poster": "growth.webp?v=unit-sum1",
+      "video": "growth.mp4?v=math-axes1",
+      "poster": "growth.webp?v=math-axes1",
       "frames": 144,
       "width": 1080,
       "height": 1352

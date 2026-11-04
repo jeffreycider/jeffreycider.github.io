@@ -5,3 +5,5 @@
 body{font-size:12px}.polynomial{font-size:clamp(9px,4.5vw,14px)}label{font-size:13px}output,button{font-size:11px}.threshold{font-size:12px}.threshold span{font-size:11px}
 
 .ai-authored{color:#b3261e}
+
+.plane{position:relative;container-type:inline-size}.axis-math{position:absolute;color:#7a684d;pointer-events:none;font-size:3.3cqw;line-height:1}.axis-math mjx-container{margin:0!important}.axis-real{right:4.8%;top:40.7%;font-size:3.9cqw}.axis-imag{left:52.8%;top:3.5%;font-size:3.9cqw}.axis-minus-one{left:13.28%;top:51.5%;transform:translateX(-50%)}.axis-plus-one{left:86.72%;top:51.5%;transform:translateX(-50%)}.axis-plus-i{right:52.2%;top:11.8%}.axis-minus-i{right:52.2%;top:85.2%}.axis-origin{right:51.56%;top:51.5%}
