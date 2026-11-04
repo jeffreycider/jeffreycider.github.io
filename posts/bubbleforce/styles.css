@@ -260,3 +260,9 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 
 [data-row-id="row-figure-3"]>.figure{width:100%;margin:0;min-width:0}
 [data-row-id="row-figure-3"] .player-frame{width:100%;height:800px}
+
+.paper-links .assets-placeholder{white-space:nowrap;flex-shrink:0}
+@media(min-width:701px){
+ .masthead .paper-links{display:grid;grid-template-columns:minmax(0,1fr);width:100%;justify-items:start}
+ .paper-links .assets-placeholder{justify-self:end}
+}
