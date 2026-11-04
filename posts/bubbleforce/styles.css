@@ -250,5 +250,10 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 /* Stack the river-valley animation above Figure 3 in the overview's right half. */
 .overview-figures{grid-column:2;grid-row:1;display:grid;gap:20px;min-width:0}
 .overview-figures>.figure{margin:0;min-width:0}
-.river-valley-figure video{display:block;width:100%;height:auto;aspect-ratio:6/5}
+.river-valley-figure video{display:block;width:100%;height:auto;aspect-ratio:10/9}
 @media(max-width:700px){.overview-figures{grid-column:1;grid-row:auto}}
+
+.paper-links .assets-placeholder img{width:24px;height:23px;flex:none}
+.masthead .paper-links{flex-wrap:wrap;gap:8px 20px}
+#predicting-hyperparameter-shocks{margin:24px 0 18px}
+.paper-links .assets-placeholder{text-align:left}
