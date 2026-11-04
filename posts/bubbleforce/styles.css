@@ -283,3 +283,6 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 .a1-methods .a1-rendering{border-top:1px solid #ded8cd;margin-top:24px;padding-top:14px}
 .a1-methods .a1-rendering summary{cursor:pointer;font-weight:700}
 @media(max-width:700px){.a1-methods .shock-settings,.a1-methods .full-run-settings{min-width:640px}.a1-methods .method-table th,.a1-methods .method-table td{padding:8px}}
+
+/* Keep unapproved convention edits red, including rendered equations. */
+.unit-sum-review mjx-container{color:#b3261e}

@@ -13,5 +13,5 @@
  $('fullscreen').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else document.querySelector('.player').requestFullscreen?.()};
  ['loadedmetadata','timeupdate','play','pause','ended','seeked'].forEach(name=>video.addEventListener(name,update));video.controls=false;video.loop=false;new ResizeObserver(report).observe(document.querySelector('.player'));
  document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey||e.target.closest('button,input'))return;if(e.key==='ArrowLeft'){e.preventDefault();show(index-1)}if(e.key==='ArrowRight'){e.preventDefault();show(index+1)}});
- fetch('slides.json?v=font-seams-fixed').then(r=>{if(!r.ok)throw Error('Slides unavailable');return r.json()}).then(data=>{slides=data.slides||data;window.aipomPlayer={get step(){return index},get count(){return slides.length},show};show(0)}).catch(()=>{status.textContent='Slides could not load. Reload to retry.';status.hidden=false});
+ fetch('slides.json?v=unit-sum1').then(r=>{if(!r.ok)throw Error('Slides unavailable');return r.json()}).then(data=>{slides=data.slides||data;window.aipomPlayer={get step(){return index},get count(){return slides.length},show};show(0)}).catch(()=>{status.textContent='Slides could not load. Reload to retry.';status.hidden=false});
 })();

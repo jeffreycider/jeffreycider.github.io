@@ -3,3 +3,5 @@
 .polynomial{font-size:clamp(10px,4.8vw,15px)}.polynomial mjx-container svg{max-width:100%;height:auto}
 
 body{font-size:12px}.polynomial{font-size:clamp(9px,4.5vw,14px)}label{font-size:13px}output,button{font-size:11px}.threshold{font-size:12px}.threshold span{font-size:11px}
+
+.ai-authored{color:#b3261e}
