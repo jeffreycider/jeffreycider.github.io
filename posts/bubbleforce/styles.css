@@ -230,3 +230,19 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 /* Pathspring introduction and Figure 7a share equal columns. */
 [data-row-id="row-19"]>.video-row,[data-row-id="row-21"]>.video-row{grid-template-columns:repeat(2,minmax(0,1fr));align-items:center}
 @media(max-width:700px){[data-row-id="row-19"]>.video-row,[data-row-id="row-21"]>.video-row{grid-template-columns:minmax(0,1fr)}}
+
+/* Center the manuscript title, with the author note on the authors' row. */
+.masthead{display:grid;grid-template-columns:minmax(0,1fr) var(--note-width);column-gap:var(--column-gap);row-gap:8px;padding-top:40px;padding-bottom:24px}
+.masthead>div:first-child{display:contents}
+.masthead h1,.masthead .subtitle,.masthead .authors,.masthead .handles,.masthead .paper-links{grid-column:1;text-align:center;margin:0}
+.masthead h1{grid-row:1;font-size:clamp(46px,5vw,68px);line-height:1.15}
+.masthead h1 p,.masthead .authors p,.masthead .handles p,.masthead .margin-note p{margin:0}
+.masthead .subtitle{grid-row:2;margin-bottom:12px}
+.masthead .authors{grid-row:3}
+.masthead .handles{grid-row:4}
+.masthead .margin-note{grid-column:2;grid-row:3;align-self:center;padding:0;margin:0;line-height:1.75}
+.masthead .paper-links{grid-row:5;display:flex;gap:24px;align-items:center;justify-content:center;margin-top:12px;font:14px/1.5 var(--sans)}
+.paper-links a,.paper-links .assets-placeholder{display:inline-flex;align-items:center;gap:7px;text-decoration:none}
+.paper-links svg{width:19px;height:19px;flex:none}
+.paper-links a:hover{text-decoration:underline}.paper-links .assets-placeholder{color:var(--muted)}
+@media(max-width:700px){.masthead{grid-template-columns:minmax(0,1fr);padding-top:28px;row-gap:8px}.masthead .margin-note{grid-column:1;grid-row:4;text-align:center;padding:0}.masthead .handles{grid-row:5}.masthead .paper-links{grid-row:6}.masthead .subtitle{font-size:20px}}
