@@ -263,6 +263,8 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 
 .paper-links .assets-placeholder{white-space:nowrap;flex-shrink:0}
 @media(min-width:701px){
- .masthead .paper-links{display:grid;grid-template-columns:minmax(0,1fr);width:100%;justify-items:start}
- .paper-links .assets-placeholder{justify-self:end}
+ .masthead .paper-links{display:grid;grid-template-columns:max-content;width:max-content;justify-self:end;justify-items:start}
+ .paper-links .assets-placeholder{justify-self:start}
 }
+
+.paper-links svg{width:24px;height:24px}
