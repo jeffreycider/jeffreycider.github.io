@@ -268,3 +268,18 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 }
 
 .paper-links svg{width:24px;height:24px}
+
+/* A1: scan settings separately from measurement and provenance notes. */
+.a1-methods .method-table-wrap{max-width:100%;overflow-x:auto;margin:24px 0;outline-offset:4px}
+.a1-methods .method-table{width:100%;border-collapse:collapse;line-height:1.5;font-size:inherit;text-align:left}
+.a1-methods .method-table caption{text-align:left;font-weight:700;padding:0 0 10px;color:var(--ink)}
+.a1-methods .method-table th,.a1-methods .method-table td{padding:9px 12px;border-bottom:1px solid #ded8cd;vertical-align:top}
+.a1-methods .method-table thead{background:#eae7e1}
+.a1-methods .method-table tbody tr:nth-child(even){background:#f4f1eb}
+.a1-methods .method-table tbody th{font-weight:400;width:32%}
+.a1-methods .method-table tfoot td{background:#f4f1eb;padding:12px}
+.a1-methods .shock-settings tbody th{width:17%}
+.a1-methods .full-run-settings th,.a1-methods .full-run-settings td{width:33.33%}
+.a1-methods .a1-rendering{border-top:1px solid #ded8cd;margin-top:24px;padding-top:14px}
+.a1-methods .a1-rendering summary{cursor:pointer;font-weight:700}
+@media(max-width:700px){.a1-methods .shock-settings,.a1-methods .full-run-settings{min-width:640px}.a1-methods .method-table th,.a1-methods .method-table td{padding:8px}}
