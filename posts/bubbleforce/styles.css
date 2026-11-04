@@ -228,5 +228,5 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 @media(max-width:900px){[data-row-id="row-8"]>.video-row,[data-row-id="row-9"]>.video-row{grid-template-columns:minmax(0,1fr)}}
 
 /* Pathspring introduction and Figure 7a share equal columns. */
-[data-row-id="row-19"]>.video-row{grid-template-columns:repeat(2,minmax(0,1fr));align-items:center}
-@media(max-width:700px){[data-row-id="row-19"]>.video-row{grid-template-columns:minmax(0,1fr)}}
+[data-row-id="row-19"]>.video-row,[data-row-id="row-21"]>.video-row{grid-template-columns:repeat(2,minmax(0,1fr));align-items:center}
+@media(max-width:700px){[data-row-id="row-19"]>.video-row,[data-row-id="row-21"]>.video-row{grid-template-columns:minmax(0,1fr)}}
