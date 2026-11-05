@@ -1,0 +1,14 @@
+Tool: built-in image_gen.imagegen
+
+Initial generation prompt:
+Use case: logo-brand.
+Create ONE finished favicon emblem for the blog "bubbleforce": Qwilfish reduced to an extremely simple bold graphic symbol, designed FIRST to be legible at 16 by 16 pixels. Square canvas with transparent exterior. Not a sheet, not a mockup, no text.
+
+The entire mark should nearly fill the square, with only 3 percent outer margin. A huge round inflated Qwilfish FACE seen directly from the front; deliberately exaggerated proportions, NO tail, NO fins, no full-body anatomy. Deep teal upper region and pale butter-yellow lower region. Two OVERSIZED white angular slanted eyes with chunky dark pupils, a grumpy mischievous expression, and a small but bold pink puckered mouth. Only FOUR or FIVE large clean triangular quills forming a simple prickly outer silhouette. Face and eyes must dominate, not spikes. Very thick dark navy outlines, flat solid fills, zero gradients or shading, zero texture, zero small spots. Crisp vector-logo appearance rendered as PNG. White eyes must remain clearly separated from teal at tiny scale. Simplify aggressively to broad masses and sturdy negative spaces; no fine detail requiring zoom.
+
+Give the outside silhouette a narrow opaque warm-white keyline so it remains visible on BOTH dark browser chrome and light browser chrome. No surrounding square, no badge, no circle enclosing the character, no drop shadow. Actual transparent background beyond this keyline.
+The desired feeling is round, puffed-up, prickly and comically grumpy. Recognizable tiny emblem with attitude, not a shrunken illustration or faithful proportional sprite.
+
+Final corrective edit prompt:
+Produce the final favicon as a completely OPAQUE SQUARE IMAGE on a solid pale warm ivory background #fffdf4. NO TRANSPARENCY anywhere. Retain this exact bold grumpy Qwilfish face composition with five spikes, oversized angular white eyes, pink mouth, teal upper face and pale yellow belly. Repair the hole in the center of its forehead by making the entire forehead a single uninterrupted opaque solid teal. Absolutely no hole, highlight, spot, gradient or texture in the forehead. All fills must be solid flat colors like a logo. Keep proportions and placement unchanged. The mark fills almost all the square with no additional margins. The ivory background is only visible in the corners around the silhouette. No lettering, no shadow. Simplified crisp graphic for a tiny favicon.
+
