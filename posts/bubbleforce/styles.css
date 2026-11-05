@@ -324,3 +324,11 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 .masthead .paper-links{margin-bottom:4px}
 .paper-flow>.abstract-summary-row:first-child{margin-top:0}
 @media(max-width:700px){.masthead{padding-top:20px}.masthead .paper-links{margin:4px 0 0}}
+
+/* Example 5: classify escape roots, then compute the boundary. */
+.qhm-escape-cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:18px 0}
+.qhm-escape-case{min-width:0}
+.qhm-escape-case+.qhm-escape-case{border-left:1px solid #c8b99f;padding-left:18px}
+.qhm-escape-cases p:last-child,.qhm-boundary p:last-child{margin-bottom:0}
+.qhm-boundary{border-top:1px solid #c8b99f;padding-top:18px;margin-top:18px}
+@media(max-width:700px){.qhm-escape-cases{grid-template-columns:minmax(0,1fr)}.qhm-escape-case+.qhm-escape-case{border-left:0;border-top:1px solid #c8b99f;padding:18px 0 0}}
