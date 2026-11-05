@@ -200,7 +200,7 @@
               </div>
             </div>
             <nav class="paper-links" aria-label="Project resources">
-              <a href="https://github.com/jeffreycider/bubbleforce-blogpost"
+              <a href="https://github.com/jeffreycider/bubbleforce"
                 ><svg viewBox="0 0 24 24" aria-hidden="true">
                   <path
                     fill="currentColor"
@@ -1120,7 +1120,19 @@
                       <p>
                         Surprisingly, some (momentum kernel, loss landscape)
                         pairs seem to have a resonance that causes future
-                        perturbations to be very predictable.
+                        perturbations to be very predictable. We can describe
+                        these future perturbations as combinations of simple
+                        patterns called modes, where each mode changes by a
+                        fixed multiplier $z$.
+                      </p>
+                      <p>$$\delta x_{t+1}=z\times\delta x_t$$</p>
+                      <p>
+                        $\delta x_t$ denotes the perturbation at step $t$.
+                        An arbitrary perturbation $\delta x$ usually combines
+                        several modes, so its overall motion can look irregular.
+                        If we choose the changes to the weights and stored
+                        momentum carefully to match a single mode, our future
+                        perturbations can follow the same multiplier $z$.
                       </p>
                       <p>
                         These orderly perturbations are complex oscillations --
@@ -2534,6 +2546,16 @@
                 </div>
               </div>
             </div>
+            <div class="asset-row inserted-row" data-row-id="unsolved-mysteries-introduction">
+              <div class="text-block" data-text-style="paragraph" data-block="unsolved-mysteries-introduction">
+                <div class="rendered">
+                  <p>While this takes a first step at understanding edge of stability dynamics for more complex, frontier optimizers, there is still much work to do.</p>
+                  <p>Many of the mechanisms that are characteristic of SGD’s edge of stability do not apply for Muon. For example, while weights oscillate along the direction of Hessian sharpness in SGD, they don’t appear to oscillate around any clear axis in Muon. We even find that most of Muon's oscillations live outside the top-64 subspace of the optimizer Jacobian.</p>
+                  <p>Many of our other intuitions around Edge of Stability for adaptive optimizers, also fall to the Muon update’s spectral geometry. What makes spectral descent so special?</p>
+                  <p>We enumerate a few of our most puzzling observations below:</p>
+                </div>
+              </div>
+            </div>
             <div class="mystery-tiles">
               <div class="mystery-tile-stack">
                 <div
@@ -2546,25 +2568,7 @@
                     data-block="text-future-mystery-1"
                   >
                     <div class="rendered">
-                      <p>
-                        <strong>Mystery 1.</strong> We wanted to explain why
-                        Muon's edge-of-stability is based on pathspring $\zeta$
-                        instead of on Hessian sharpness $\lambda$ like in SGD's
-                        edge-of-stability. Our initial hypothesis is that both
-                        equilibrate based on their direction sharpness -- the
-                        sharpness along their chosen update direction, which is
-                        the only thing an optimizer can feel -- and SGD happens
-                        to oscillate along the principal Hessian eigenvector.
-                        Our expectation was that Muon would oscillate along the
-                        top $k$ principal $\script{J}_\script{T}$ eigenvectors.
-                        <strong>This is not true.</strong> Only 25% of the Muon
-                        oscillation is represented in the top-64 eigenspace of
-                        $\script{J}_\script{T}$.
-                        <strong
-                          >Where do the Muon oscillations live, if not in the
-                          sharpest directions?</strong
-                        >
-                      </p>
+                      <p><strong>Mystery 1.</strong> We wanted to explain why Muon's edge-of-stability is based on pathspring $\zeta$ instead of on Hessian sharpness $\lambda$ like in SGD's edge-of-stability. Our initial hypothesis was that both equilibrate based on their directional sharpness -- the sharpness along the chosen update direction, which is the only thing an optimizer can feel. So for SGD, being a local Taylor approximation, oscillates along the largest Hessian eigenvector. Our expectation was that Muon would similarly oscillate along the top $k$ principal $\mathcal{J}_{\mathcal{T}}$ eigenvectors. <strong>This is not true.</strong> Only 25% of the Muon oscillation is represented in the top-64 eigenspace of $\mathcal{J}_{\mathcal{T}}$. <strong>Where do the Muon oscillations live, if not in the sharpest directions?</strong></p>
                     </div>
                   </div>
                 </div>
@@ -2580,10 +2584,7 @@
                     data-block="text-future-mystery-2"
                   >
                     <div class="rendered">
-                      <p>
-                        <strong>Mystery 2.</strong> What causes progressive
-                        sharpening?
-                      </p>
+                      <p><strong>Mystery 2.</strong> What causes progressive sharpening?</p>
                     </div>
                   </div>
                 </div>
@@ -2597,14 +2598,7 @@
                     data-block="text-future-mystery-3"
                   >
                     <div class="rendered">
-                      <p>
-                        <strong>Mystery 3.</strong> Can bubbleforce be
-                        generalized to adaptive optimizers? We tried to apply
-                        $\eta\zeta=\bubbleforce$ to Adam. Like
-                        <a href="#ref-bai2026">Bai et al. (2026)</a>, we found
-                        that almost-dead neurons invalidate principal
-                        eigenvalues as a measurement tool.
-                      </p>
+                      <p><strong>Mystery 3.</strong> Can bubbleforce be generalized to adaptive optimizers? We tried to apply $\eta\zeta=\bubbleforce$ to Adam. Like <a href="#ref-bai2026">Bai et al. (2026)</a>, we found that almost-dead neurons invalidate principal eigenvalues as a measurement tool.</p>
                     </div>
                   </div>
                 </div>
@@ -2618,12 +2612,7 @@
                     data-block="text-future-mystery-4"
                   >
                     <div class="rendered">
-                      <p>
-                        <strong>Mystery 4.</strong> Why does MaxEntSlop work?
-                        Why did the Bulbasaur's lower outline training run
-                        diverge? When is it acceptable to vary the momentum
-                        kernel mid-run, and when is it destabilizing?
-                      </p>
+                      <p><strong>Mystery 4.</strong> Why did increasing momentum cause our pathspring to consistently sit under our predicted equilibrium? Why did the Bulbasaur's lower outline training run diverge, even when train loss remained steady?</p>
                     </div>
                   </div>
                 </div>
@@ -2639,19 +2628,7 @@
                     data-block="text-future-mystery-5"
                   >
                     <div class="rendered">
-                      <p>
-                        <strong>Mystery 5.</strong> Hessian basis churn is
-                        actually quite dramatic; operator Jacobian
-                        $\script{J}_\script{T}$ basis churn is worse. Damian and
-                        Cohen's proposed mechanisms for self-stabilization
-                        involve oscillation along a fixed eigenvector over time
-                        to trigger a sharpness penalty in the gradient. But most
-                        top Hessian eigenvectors rotate out of the principal
-                        subspace by 50 degrees every iteration. For Muon's
-                        $\script{J}_\script{T}$ that angle is usually around 75
-                        degrees. Are these rotations structured in a way that is
-                        compatible with the 3rd order regularization narrative?
-                      </p>
+                      <p><strong>Mystery 5.</strong> Hessian basis churn in SGD is actually quite dramatic, but operator Jacobian $\mathcal{J}_{\mathcal{T}}$ basis churn is worse. Damian and Cohen's proposed mechanisms for self-stabilization involve oscillation along a fixed eigenvector over time to trigger a sharpness penalty in the gradient. But most top Hessian eigenvectors rotate out of the principal subspace by 50 degrees every iteration. For Muon's $\mathcal{J}_{\mathcal{T}}$ that angle is usually around 75 degrees. Are these rotations structured in a way that is compatible with the 3rd order regularization narrative?</p>
                     </div>
                   </div>
                 </div>
@@ -3280,25 +3257,30 @@
                   data-block="hvp-appendix"
                 >
                   <div class="rendered">
-                    <p>
-                      $v_i$ is the shard of the Krylov basis vector $v$ stored
-                      on GPU $i$.
-                    </p>
-                    <p>
-                      $H_i$ is GPU $i$'s Hessian contribution. Each GPU gets
-                      2,097,152 tokens (2,048 sequences) and computes its
-                      contribution over the full model parameter vector used in
-                      the HVP.
-                    </p>
-                    <p>
-                      $Hv$ is the full Hessian-vector product, summed over all
-                      GPUs' data.
-                    </p>
-                    <p>
-                      $(Hv)_i$ is GPU $i$'s shard of the full Hessian-vector
-                      product, corresponding to its shard $v_i$. For example,
-                      GPU 1 stores $(Hv)_1$.
-                    </p>
+                    <table class="hvp-symbols">
+                      <caption>Symbols in the distributed Hessian-vector product</caption>
+                      <thead>
+                        <tr><th scope="col">Symbol</th><th scope="col">Description</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">$v_i$</th>
+                          <td>The shard of the Krylov basis vector $v$ stored on GPU $i$.</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">$H_i$</th>
+                          <td>GPU $i$'s Hessian contribution. Each GPU gets 2,097,152 tokens (2,048 sequences) and computes its contribution over the full model parameter vector used in the HVP.</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">$Hv$</th>
+                          <td>The full Hessian-vector product, summed over all GPUs' data.</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">$(Hv)_i$</th>
+                          <td>GPU $i$'s shard of the full Hessian-vector product, corresponding to its shard $v_i$. For example, GPU 1 stores $(Hv)_1$.</td>
+                        </tr>
+                      </tbody>
+                    </table>
                     <figure class="figure">
                       <a href="./figures/hvp-implementation.svg"
                         ><img

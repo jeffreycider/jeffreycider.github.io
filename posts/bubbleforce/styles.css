@@ -411,3 +411,10 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 .a1-layout .method-table caption{font-size:16px}
 .a1-tile-column>p{margin:16px 0 0}
 @container(max-width:760px){.a1-layout{grid-template-columns:minmax(0,1fr);gap:20px}}
+
+.hvp-symbols{width:100%;border-collapse:collapse;margin:0 0 24px;font-size:16px;line-height:1.6;text-align:left}
+.hvp-symbols caption{text-align:left;font-weight:700;padding:0 0 10px;color:var(--ink)}
+.hvp-symbols th,.hvp-symbols td{padding:10px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+.hvp-symbols thead{background:#eae7e1}
+.hvp-symbols tbody th{width:16%;font-weight:400;white-space:nowrap}
+@media(max-width:700px){.hvp-symbols th,.hvp-symbols td{padding:8px}}
