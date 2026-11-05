@@ -37,3 +37,5 @@ in this repository. The preview URL displays the latest deployed snapshot.
 - The Uranus photograph is credited to NASA/JPL-Caltech: https://science.nasa.gov/photojournal/uranus-as-seen-by-nasas-voyager-2/.
 - R. J. Hall's gravitational perturbation diagram is used under CC BY-SA 3.0: https://commons.wikimedia.org/wiki/File:Gravitational_perturbation.svg. Attribution and the license link are also displayed beside the figure.
 - Third-party imagery and fonts retain their applicable rights; the repository's software license does not supersede those rights.
+
+- Qwilfish favicon: original 2D Pokémon Crystal sprite, sourced from [PokéAPI sprites](https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/versions/generation-ii/crystal/transparent/211.png). Pokémon artwork belongs to its respective rights holders. `favicon.png` preserves the source image; `favicon.svg` frames the same pixels for a browser tab.
