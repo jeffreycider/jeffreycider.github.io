@@ -53,6 +53,7 @@ window.addEventListener('message',e=>{if(e.origin!==location.origin)return;const
 const mediaCache=new Map();function prepareVideo(video){if(video.dataset.ready==='true')return Promise.resolve();if(video._readyPromise)return video._readyPromise;video._readyPromise=(async()=>{video.dataset.loading='true';const url=video.dataset.originalSrc||video.getAttribute('src')||video.querySelector('source')?.getAttribute('src');video.dataset.originalSrc=url;try{if(!mediaCache.has(url))mediaCache.set(url,fetch(url,{credentials:'same-origin'}).then(async response=>{if(!response.ok)throw Error('Video download failed');return URL.createObjectURL(await response.blob())}).catch(e=>{mediaCache.delete(url);throw e}));const blob=await mediaCache.get(url);const wasPlaying=!video.paused,at=video.currentTime;video.src=blob;video.preload='auto';video.load();await new Promise((resolve,reject)=>{video.addEventListener('loadedmetadata',resolve,{once:true});video.addEventListener('error',reject,{once:true})});video.dataset.ready='true';if(at>0)video.currentTime=Math.min(at,video.duration);if(wasPlaying)video.play().catch(()=>{})}catch{video.dataset.loading='false';video._readyPromise=null;video.addEventListener('pointerdown',()=>prepareVideo(video),{once:true});throw Error('Video download failed')}})();return video._readyPromise}
 const mediaObserver=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){prepareVideo(e.target).catch(()=>{});mediaObserver.unobserve(e.target)}},{rootMargin:'600px'});document.querySelectorAll('video').forEach(video=>{video.controls=false;video.removeAttribute('controls');installVideoControls(video);mediaObserver.observe(video)});
 function installVideoControls(video){
+ if(video.closest('#figure-11'))return installPlanetSlides(video);
  const wrapper=document.createElement('div');wrapper.className='media-player';video.before(wrapper);wrapper.append(video);
  const bar=document.createElement('div');bar.className='media-controls';bar.innerHTML='<button type="button" class="media-play" aria-label="Play video">Play</button><input type="range" class="media-seek" min="0" max="1" value="0" step="0.01" disabled aria-label="Seek video"><output class="media-time">0:00 / 0:00</output><button type="button" class="media-fullscreen" aria-label="Fullscreen video">⛶</button>';wrapper.append(bar);
  const play=bar.querySelector('.media-play'),seek=bar.querySelector('input'),time=bar.querySelector('output');
@@ -64,4 +65,36 @@ function installVideoControls(video){
  bar.querySelector('.media-fullscreen').onclick=()=>{if(document.fullscreenElement)document.exitFullscreen?.();else wrapper.requestFullscreen?.()};update();
 }
 
+function installPlanetSlides(video){
+ const clips=[[0,3.5],[3.5,9],[9,11.5]];let slide=0,raf=0,revision=0,loading=false;
+ const wrapper=document.createElement('div');wrapper.className='media-player planet-slides';video.before(wrapper);
+ const head=document.createElement('div');head.className='planet-player-heading';head.innerHTML='<output class="slide-number" aria-live="polite">1 / 3</output><button type="button" class="media-fullscreen" aria-label="Fullscreen slideshow">⛶</button>';
+ const bar=document.createElement('nav');bar.className='slide-controls';bar.setAttribute('aria-label','Uranus slides');bar.innerHTML='<button type="button" class="slide-prev" aria-label="Previous slide">◀ Prev</button><button type="button" class="slide-replay" aria-label="Replay current slide">↻ Replay</button><button type="button" class="slide-next" aria-label="Next slide">Next ▶</button>';
+ const seekBar=document.createElement('div');seekBar.className='media-controls slide-seek';seekBar.innerHTML='<button type="button" class="media-play" aria-label="Play slide">Play</button><input class="media-seek" type="range" min="0" max="3.5" step="0.01" value="0" disabled aria-label="Seek within current slide"><output class="media-time"></output>';
+ wrapper.append(head,video,seekBar,bar);
+ const prev=bar.querySelector('.slide-prev'),next=bar.querySelector('.slide-next'),replay=bar.querySelector('.slide-replay'),play=seekBar.querySelector('.media-play'),seek=seekBar.querySelector('input');
+ function update(){
+  const[start,end]=clips[slide],at=Math.max(0,Math.min(end-start-.067,video.currentTime-start));
+  prev.disabled=slide===0;next.disabled=slide===clips.length-1;seek.disabled=loading||!Number.isFinite(video.duration);play.disabled=loading;
+  seek.max=end-start-.067;seek.value=at;head.querySelector('.slide-number').textContent=(slide+1)+' / '+clips.length;
+  seekBar.querySelector('output').textContent=at.toFixed(1)+' / '+(end-start).toFixed(1)+'s';
+  play.textContent=video.paused?'Play':'Pause';play.setAttribute('aria-label',video.paused?'Play slide':'Pause slide');
+ }
+ function stopAtBoundary(){if(!video.paused&&video.currentTime>=clips[slide][1]-.067){video.pause();video.currentTime=clips[slide][1]-.067}update()}
+ function watch(){cancelAnimationFrame(raf);stopAtBoundary();if(!video.paused)raf=requestAnimationFrame(watch)}
+ async function start(index,restart){
+  const token=++revision;video.pause();slide=Math.max(0,Math.min(clips.length-1,index));loading=true;update();
+  try{await prepareVideo(video);if(token!==revision)return;
+   if(restart||video.currentTime<clips[slide][0]||video.currentTime>=clips[slide][1]-.09)video.currentTime=clips[slide][0];
+   await video.play();
+  }catch{if(token===revision)play.title='Playback failed; click Play to retry.'}
+  finally{if(token===revision){loading=false;update()}}
+ }
+ prev.onclick=()=>start(slide-1,true);next.onclick=()=>start(slide+1,true);replay.onclick=()=>start(slide,true);
+ play.onclick=()=>{if(!video.paused){++revision;video.pause()}else start(slide,false)};
+ seek.oninput=()=>{video.currentTime=clips[slide][0]+Number(seek.value);update()};
+ video.addEventListener('play',watch);video.addEventListener('pause',()=>{cancelAnimationFrame(raf);update()});video.addEventListener('timeupdate',stopAtBoundary);
+ ['loadedmetadata','seeked','ended'].forEach(e=>video.addEventListener(e,update));
+ head.querySelector('.media-fullscreen').onclick=()=>document.fullscreenElement?document.exitFullscreen?.():wrapper.requestFullscreen?.();update();
+}
 })();

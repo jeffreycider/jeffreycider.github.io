@@ -1,0 +1,48 @@
+<!doctype html><meta charset="utf-8"><style>@font-face{font-family:Pokemon;src:url('../../v71/qwilfish/gen2-dialogue.woff2')}*{box-sizing:border-box}html,body{margin:0;background:#f5f0e6}canvas{display:block;width:1200px;height:760px}</style><canvas width="1200" height="760"></canvas><script>window.MathJax={svg:{fontCache:'none'},startup:{typeset:false}};</script><script src="../../vendor/mathjax/tex-svg.js"></script><script>
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d');
+window.menu=(c,text,x,y,w,h,size=29)=>{c.save();c.fillStyle='#fffdf7';c.strokeStyle='#343b48';c.lineWidth=3;c.beginPath();c.roundRect(x,y,w,h,10);c.fill();c.stroke();c.strokeStyle='#b5b6b0';c.lineWidth=1;c.strokeRect(x+6,y+6,w-12,h-12);c.font=`${size}px Pokemon`;c.fillStyle='#252b35';c.textAlign='center';c.textBaseline='middle';c.fillText(text,x+w/2,y+h/2+2);c.restore()};
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+let DATA;const ready=Promise.all([MathJax.startup.promise,document.fonts.load('29px Pokemon'),fetch('paths.json').then(x=>x.json()).then(x=>DATA=x)]);
+function path(points,project,start=0,end=points.length-1){ctx.beginPath();for(let k=start;k<=end;k++){const [x,y]=project(points[k]);k===start?ctx.moveTo(x,y):ctx.lineTo(x,y)}}
+function planet(x,y,r,type){ctx.save();let g=ctx.createRadialGradient(x-r*.32,y-r*.38,0,x,y,r);if(type==='sun'){g.addColorStop(0,'#fff2af');g.addColorStop(.6,'#edb14c');g.addColorStop(1,'#bb702b')}else{g.addColorStop(0,type==='neptune'?'#8fa9ee':'#e7ffff');g.addColorStop(.7,type==='neptune'?'#466aac':'#91d7d6');g.addColorStop(1,type==='neptune'?'#243e72':'#457e89')}ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,2*Math.PI);ctx.fill();ctx.strokeStyle=type==='sun'?'#bc803f':'#38616d';ctx.lineWidth=1.4;ctx.stroke();ctx.restore()}
+// Fixed seeds are followed through the time-dependent potential. No framewise reseeding.
+function drawNeptune(t){
+ ctx.fillStyle='#090f20';ctx.fillRect(0,0,1200,760);
+ const progress=clamp((t-.65)/6.1), idx=Math.round(progress*240), D=DATA;
+ menu(ctx,'Uranus should travel along the gravitational geodesics.',30,17,1140,61,27);
+ for(let side=0;side<2;side++){
+  const x0=side?614:20,y0=158,w=566,h=508;
+  const project=p=>[x0+200+p[0]*280,y0+460-p[1]*280];
+  ctx.save();ctx.beginPath();ctx.roundRect(x0,y0,w,h,10);ctx.clip();ctx.fillStyle='#0b1428';ctx.fillRect(x0,y0,w,h);
+  const [sx,sy]=project([0,0]);
+  const N=D.neptune[idx], mass=side?D.mass:0;
+  // Phi=-1/r-m/|r-N|+m r.N/R^3; same potential as the trajectory integrator.
+  const field=document.createElement('canvas');field.width=142;field.height=127;
+  const fc=field.getContext('2d'),pixels=fc.createImageData(142,127);
+  for(let iy=0;iy<127;iy++)for(let ix=0;ix<142;ix++){
+    const rx=(ix*w/141-200)/280,ry=(460-iy*h/126)/280;
+    const phi=-1/Math.max(.04,Math.hypot(rx,ry))-mass/Math.max(.025,Math.hypot(rx-N[0],ry-N[1]))+mass*(rx*N[0]+ry*N[1])/D.radius**3;
+    const q=clamp((-phi-.55)/2.7),j=4*(iy*142+ix);
+    const stops=[[9,18,37],[24,40,67],[55,53,96],[100,64,119],[155,94,133]];
+    const u=q*4,k=Math.min(3,Math.floor(u)),a=u-k;
+    for(let c=0;c<3;c++)pixels.data[j+c]=Math.round(stops[k][c]*(1-a)+stops[k+1][c]*a);pixels.data[j+3]=255;
+  }
+  fc.putImageData(pixels,0,0);ctx.drawImage(field,x0,y0,w,h);
+  // Short overlapping trajectory windows yield coherent moving families.
+  for(const pair of D.families){ctx.strokeStyle='#aabce044';ctx.lineWidth=1.15;path(pair[side],project,Math.max(0,idx-55),Math.min(264,idx+80));ctx.stroke()}
+  const predicted=side?D.truth:D.base;
+  // Full selected trajectory is faint; its present neighborhood is bright.
+  path(predicted,project,0,240);ctx.strokeStyle='#e4c8f377';ctx.lineWidth=2.2;ctx.stroke();
+  path(predicted,project,Math.max(0,idx-42),Math.min(240,idx+52));ctx.strokeStyle='#100f2866';ctx.lineWidth=10;ctx.stroke();ctx.strokeStyle='#f0bfff';ctx.lineWidth=7;ctx.stroke();
+  // Actual schematic Uranus history, identical in both panels.
+  path(D.truth,project,0,idx);ctx.strokeStyle='#70e5e5';ctx.lineWidth=2.5;ctx.stroke();
+  planet(sx,sy,20,'sun');ctx.font='20px Georgia';ctx.textAlign='center';ctx.fillStyle='#ffe0ac';ctx.fillText('Sun',sx,sy+40);
+  if(side){const[nx,ny]=project(D.neptune[idx]);planet(nx,ny,13,'neptune');ctx.font='20px Georgia';ctx.fillStyle='#b4d4ff';ctx.fillText('Neptune',Math.min(x0+w-45,nx),ny+34)}
+  const [ux,uy]=project(D.truth[idx]);ctx.shadowColor='#fff';ctx.shadowBlur=9;planet(ux,uy,11,'uranus');ctx.shadowBlur=0;
+  ctx.restore();ctx.strokeStyle='#49506c';ctx.lineWidth=1;ctx.strokeRect(x0,y0,w,h);
+  menu(ctx,side?'With Neptune':'Without Neptune',x0+65,92,w-130,52,28);
+  if(progress>.18){ctx.save();ctx.globalAlpha=clamp((progress-.18)*4);menu(ctx,side?'Prediction fits.':'Prediction misses.',x0+3,690,w-6,51,28);ctx.restore()}
+ }
+}
+window.draw=async(kind,t)=>{await ready;if(kind==='uranus')await window.prepareUranusMath(t);const h=kind==='uranus'?900:760;if(canvas.height!==h)canvas.height=h;canvas.style.height=h+'px';ctx.clearRect(0,0,1200,h);kind==='uranus'?window.drawUranus(ctx,t):drawNeptune(t)};
+</script><script src="uranus.js"></script>

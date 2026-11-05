@@ -287,3 +287,40 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 
 /* Keep unapproved convention edits red, including rendered equations. */
 .unit-sum-review mjx-container{color:#b3261e}
+
+/* Ice giants: half-width figures beside the corresponding historical prose. */
+.planet-uranus-row,.planet-neptune-text{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+.planet-uranus-row>.figure,.planet-neptune-text>.figure{margin:0;width:100%;min-width:0}
+.planet-uranus-row video,.planet-neptune-text video{display:block;width:100%;height:auto;aspect-ratio:30/19;max-height:none;object-fit:contain}
+@media(max-width:800px){.planet-uranus-row,.planet-neptune-text{grid-template-columns:minmax(0,1fr)}}
+
+.planet-uranus-row video{aspect-ratio:4/3}
+
+@font-face{font-family:PlanetGen2;src:url('./v71/qwilfish/gen2-dialogue.woff2?v=font-union')}
+.planet-slides{padding:10px;background:#e9e7ec;border-radius:6px}
+.planet-player-heading{display:flex;justify-content:flex-end;align-items:center;gap:12px;padding-bottom:7px}
+.planet-player-heading .slide-number{font:11px var(--sans);color:#6f7381}
+.planet-slides .slide-controls{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:10px;padding-top:8px}
+.planet-slides .slide-controls button{min-height:44px;font:13px PlanetGen2,system-ui,sans-serif;padding:8px;background:#f8f6fa;color:#263041;border:2px solid #6b6278;border-bottom-width:4px;border-radius:9px;cursor:pointer}
+.planet-slides .slide-controls .slide-replay{background:#e6dfed}
+.planet-slides button:disabled{opacity:.4;cursor:default}
+.planet-slides .slide-controls button:active:not(:disabled){transform:translateY(2px);border-bottom-width:2px}
+.planet-slides button:focus-visible{outline:3px solid #9367b7;outline-offset:3px}
+.planet-slides .media-fullscreen{font:20px/1 Arial,sans-serif;padding:4px 8px;border:1px solid #6b6278;border-radius:4px;background:#f8f6fa;color:#263041;cursor:pointer}
+.planet-slides .slide-seek{display:flex;gap:8px;padding:10px 0 0;background:none;border:0}
+.planet-slides .slide-seek input{flex:1;min-width:0;accent-color:#8a6b9b}
+.planet-slides .slide-seek output{font:11px var(--sans);white-space:nowrap}
+.planet-slides .slide-seek button{font:11px Arial,sans-serif;padding:5px 8px;border:1px solid #6b6278;border-radius:3px;background:#f8f6fa}
+@media(max-width:600px){.planet-slides .slide-controls{gap:7px}.planet-slides .slide-controls button{padding:8px 4px}}
+.planet-slides:fullscreen{justify-content:flex-start;background:#e9e7ec;overflow:auto}
+.planet-slides:fullscreen video{flex:1;min-height:0;height:auto;max-height:calc(100vh - 160px)}
+.planet-slides:fullscreen .slide-controls{width:100%;max-width:1200px;align-self:center;flex:none}
+
+/* Compact manuscript masthead; author names share the prose typeface. */
+.masthead{padding-top:28px;padding-bottom:14px;margin-bottom:12px;row-gap:6px}
+.masthead h1{font-size:clamp(36px,3.2vw,46px);letter-spacing:-.04em}
+.masthead .subtitle{font-size:clamp(18px,1.6vw,22px);margin-bottom:4px;align-self:center}
+.masthead .authors{font-family:var(--serif)}
+.masthead .paper-links{margin-bottom:4px}
+.paper-flow>.abstract-summary-row:first-child{margin-top:0}
+@media(max-width:700px){.masthead{padding-top:20px}.masthead .paper-links{margin:4px 0 0}}
