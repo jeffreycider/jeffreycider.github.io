@@ -1118,28 +1118,21 @@
                   >
                     <div class="rendered">
                       <p>
-                        Surprisingly, some (momentum kernel, loss landscape)
-                        pairs seem to have a resonance that causes future
-                        perturbations to be very predictable. We can describe
-                        these future perturbations as combinations of simple
-                        patterns called modes, where each mode changes by a
-                        fixed multiplier $z$.
+                        Surprisingly, if we choose the initial perturbation to
+                        the weights $\delta x_t$, and our stored momentum,
+                        carefully, our future perturbations $\delta x_{t+1}$
+                        can follow a predictable, multiplicative pattern:
                       </p>
                       <p>$$\delta x_{t+1}=z\times\delta x_t$$</p>
                       <p>
-                        $\delta x_t$ denotes the perturbation at step $t$.
-                        An arbitrary perturbation $\delta x$ usually combines
-                        several modes, so its overall motion can look irregular.
-                        If we choose the changes to the weights and stored
-                        momentum carefully to match a single mode, our future
-                        perturbations can follow the same multiplier $z$.
-                      </p>
-                      <p>
                         These orderly perturbations are complex oscillations --
-                        every perturbation rotates the same angle and
+                        every perturbation rotates by the same angle and
                         grows/shrinks by the same factor. We can represent these
                         with complex numbers $z\in\mathbb{C}$, as visualized in
-                        Figure 5.
+                        Figure 5. We can also observe that an arbitrary initial
+                        perturbation may combine several such patterns, each
+                        with its own multiplier, so successive perturbations
+                        can appear irregular.
                       </p>
                       <p>
                         To check whether a specific candidate oscillation
@@ -2549,10 +2542,9 @@
             <div class="asset-row inserted-row" data-row-id="unsolved-mysteries-introduction">
               <div class="text-block" data-text-style="paragraph" data-block="unsolved-mysteries-introduction">
                 <div class="rendered">
-                  <p>While this takes a first step at understanding edge of stability dynamics for more complex, frontier optimizers, there is still much work to do.</p>
-                  <p>Many of the mechanisms that are characteristic of SGD’s edge of stability do not apply for Muon. For example, while weights oscillate along the direction of Hessian sharpness in SGD, they don’t appear to oscillate around any clear axis in Muon. We even find that most of Muon's oscillations live outside the top-64 subspace of the optimizer Jacobian.</p>
-                  <p>Many of our other intuitions around Edge of Stability for adaptive optimizers, also fall to the Muon update’s spectral geometry. What makes spectral descent so special?</p>
-                  <p>We enumerate a few of our most puzzling observations below:</p>
+                  <p>While this blogpost takes a first step at understanding edge of stability dynamics for more complex, frontier optimizers like Muon, there is still much work to do.</p>
+                  <p><a href="#ref-damian2022">Damian et al.</a> finds an elegant, analytical explanation for why SGD’s edge of stability self-stabilizes and oscillates along the top Hessian eigenvector direction. We have nothing close to this for Muon. Muon’s oscillations don’t appear to oscillate along any clear axis, and they do not even appear to live in the top-64 eigenvector subspace of our optimizer Jacobian!</p>
+                  <p>What makes spectral descent with momentum so special? We enumerate a few of our most puzzling observations below:</p>
                 </div>
               </div>
             </div>
@@ -2568,7 +2560,7 @@
                     data-block="text-future-mystery-1"
                   >
                     <div class="rendered">
-                      <p><strong>Mystery 1.</strong> We wanted to explain why Muon's edge-of-stability is based on pathspring $\zeta$ instead of on Hessian sharpness $\lambda$ like in SGD's edge-of-stability. Our initial hypothesis was that both equilibrate based on their directional sharpness -- the sharpness along the chosen update direction, which is the only thing an optimizer can feel. So for SGD, being a local Taylor approximation, oscillates along the largest Hessian eigenvector. Our expectation was that Muon would similarly oscillate along the top $k$ principal $\mathcal{J}_{\mathcal{T}}$ eigenvectors. <strong>This is not true.</strong> Only 25% of the Muon oscillation is represented in the top-64 eigenspace of $\mathcal{J}_{\mathcal{T}}$. <strong>Where do the Muon oscillations live, if not in the sharpest directions?</strong></p>
+                      <p><strong>Mystery 1.</strong> We wanted to explain why Muon's edge-of-stability is based on pathspring $\zeta$ instead of on Hessian sharpness $\lambda$ like in SGD's edge-of-stability. Our initial hypothesis was that both equilibrate based on their directional sharpness -- the sharpness along their chosen update direction, which is the only thing an optimizer can feel. For SGD, a local Taylor expansion predicts oscillations occur along the top Hessian eigenvector direction. Our expectation was that Muon would similarly oscillate along the top $k$ principal $\mathcal{J}_{\mathcal{T}}$ eigenvectors. <strong>This is not true.</strong> Only 25% of the Muon oscillation is represented in the top-64 eigenspace of $\mathcal{J}_{\mathcal{T}}$. <strong>Where do the Muon oscillations live, if not in the sharpest directions?</strong></p>
                     </div>
                   </div>
                 </div>
