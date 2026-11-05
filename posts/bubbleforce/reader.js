@@ -46,6 +46,14 @@ function scheduleNotes(){cancelAnimationFrame(noteFrame);noteFrame=requestAnimat
 
 new ResizeObserver(scheduleNotes).observe(flow);new ResizeObserver(scheduleNotes).observe(noteColumn);
 window.addEventListener('resize',scheduleNotes);document.fonts?.ready.then(scheduleNotes);document.addEventListener('load',scheduleNotes,true);
+// HTML pretty-printers may wrap TeX text labels. MathJax preserves their
+// indentation, so collapse only ordinary whitespace inside these text commands.
+const mathTextNodes=document.createTreeWalker(document.querySelector('main'),NodeFilter.SHOW_TEXT);
+while(mathTextNodes.nextNode()){
+ const node=mathTextNodes.currentNode;
+ if(node.parentElement.closest('script,style,pre,code'))continue;
+ node.nodeValue=node.nodeValue.replace(/(\\(?:text|textrm|textbf|textit|textnormal|mbox|tag)\{)([^{}]*)(\})/g,(_,start,label,end)=>start+label.replace(/\s+/g,' ')+end);
+}
 window.bubbleforceReady=MathJax.startup.promise.then(()=>MathJax.typesetPromise([document.querySelector('main')])).then(()=>{scheduleNotes();return new Promise(resolve=>requestAnimationFrame(resolve))});
 window.addEventListener('message',e=>{if(e.origin!==location.origin)return;const kind=e.data?.type;if(!['blog-root-height','qwilfish-height','aipom-height'].includes(kind))return;for(const frame of document.querySelectorAll('.root-card iframe,.player-frame'))if(frame.contentWindow===e.source){const h=Number(e.data.height);if(Number.isFinite(h))frame.style.height=Math.max(220,Math.min(1200,h))+'px'}});
 

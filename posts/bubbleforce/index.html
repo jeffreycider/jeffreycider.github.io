@@ -20,7 +20,7 @@
       type="image/svg+xml"
       sizes="any"
     />
-    <link href="./styles.css?v=qhm-compact1" rel="stylesheet" />
+    <link href="./styles.css?v=annotations-a1-20261105" rel="stylesheet" />
     <script>
       window.MathJax = {
         loader: {
@@ -48,7 +48,7 @@
       };
     </script>
     <script defer="" src="./vendor/mathjax/tex-svg.js"></script>
-    <script defer="" src="reader.js?v=planet-slides2"></script>
+    <script defer="" src="reader.js?v=math-text-spacing1"></script>
   </head>
   <body>
     <main id="top">
@@ -386,9 +386,7 @@
                         constant learning rate $\eta$ satisfies
                       </p>
                       <p>
-                        $$\underset{\color{red}{\text{converges to
-                        minimum}}}{\text{convergence}}\quad\underset{\color{red}{\text{iff}}}{\Longleftrightarrow}\quad\underset{\color{red}{\text{LR
-                        is tuned to curvature}}}{0&lt;\eta\lambda&lt;2}.$$
+                        $$\underset{\color{red}{\text{converges to minimum}}}{X_t\to0\;\text{for all }X_0}\quad\underset{\color{red}{\text{iff}}}{\Longleftrightarrow}\quad\underset{\color{red}{\text{LR is tuned to curvature}}}{0&lt;\eta\lambda&lt;2}.$$
                       </p>
                       <p>
                         <strong>Proof.</strong> $$\begin{align*}
@@ -545,10 +543,8 @@
                           $$\mathbb E[\nabla L(W_t)]\approx\nabla L(\bar
                           W)+\underbrace{{\color{red}\enclose{updiagonalstrike}{{\color{black}\mathbb
                           E[x_t]S(\bar W)u}}}}_{\color{red}{\substack{\mathbb
-                          E[x_t]=0\\\text{oscillations are
-                          symmetric}}}}+\underbrace{\frac12\mathbb
-                          E[x_t^2]\nabla S(\bar W)}_{\color{red}{\text{sharpness
-                          penalty}}}.$$
+                          E[x_t]=0\\\text{oscillations are symmetric}}}}+\underbrace{\frac12\mathbb
+                          E[x_t^2]\nabla S(\bar W)}_{\color{red}{\text{sharpness penalty}}}.$$
                         </p>
                         <p>
                           Thus, oscillations cause a 3rd-order regularization:
@@ -556,8 +552,7 @@
                         <p>
                           $$\boxed{\Delta
                           W_{\mathrm{cubic}}=-\frac{\eta}{2}\mathbb
-                          E[x_t^2]\nabla S(\bar W)}\tag{Sharpness-lowering
-                          force}$$
+                          E[x_t^2]\nabla S(\bar W)}\tag{Sharpness-lowering force}$$
                         </p>
                         <p>
                           <a href="#appendix-central-flows"
@@ -1161,8 +1156,7 @@
                       </p>
                       <p>
                         $$\begin{align} z^t-\eta\lambda \sum_k c_k
-                        z^{t-k}&amp;=z^{t+1}\tag{Substitute SGD perturbation
-                        $\delta W_k$ with $z^k$.}\\ P_{\eta\lambda,
+                        z^{t-k}&amp;=z^{t+1}\tag{Substitute SGD perturbation $\delta W_k$ with $z^k$.}\\ P_{\eta\lambda,
                         c}(z):=z^{t+1}-z^t+\eta\lambda \sum_k c_k
                         z^{t-k}&amp;=0\\ \end{align} $$
                       </p>
@@ -1735,8 +1729,7 @@
                   </p>
                   <p>
                     $$\delta(\text{update})\approx
-                    \underbrace{\color{teal}{-\eta\times\script{J}_{\script{T}}(W_t)}}_{\color{teal}{\text{Hooke's
-                    constant}}}\times \underbrace{\color{purple}{\delta
+                    \underbrace{\color{teal}{-\eta\times\script{J}_{\script{T}}(W_t)}}_{\color{teal}{\text{Hooke's constant}}}\times \underbrace{\color{purple}{\delta
                     W_t}}_{\color{purple}{\text{Spring displacement}}}.$$
                   </p>
                   <p>
@@ -1885,8 +1878,7 @@
                         $$\begin{array}{rcl} \widetilde
                         W_{t+1}&amp;=&amp;\widetilde
                         W_t-\eta\,\operatorname{msign}(\widetilde M_t)
-                        \\[-0.2em] &amp;&amp;\hfill\scriptstyle\text{(perturbed
-                        trajectory)} \\[0.3em]
+                        \\[-0.2em] &amp;&amp;\hfill\scriptstyle\text{(perturbed trajectory)} \\[0.3em]
                         -\,W_{t+1}&amp;=&amp;-\,W_t+\eta\,\operatorname{msign}(M_t)
                         \\[0.5em]\hline\\[-0.5em] \delta
                         W_{t+1}&amp;\simeq&amp;\delta W_t-\eta\,\mathcal
@@ -1948,7 +1940,7 @@
                           >
                         </p>
                         <p>
-                          $${\color{red}{\frac{\script{J}_{\script{T}}(W_t)v}{c_0}}}
+                          $$\frac{\script{J}_{\script{T}}(W_t)v}{c_0}
                           =\underbrace{\script{J}_{\operatorname{msign}}(M_t)\!\left[
                           \underbrace{H(W_t)v}_{\color{red}{\text{HVP}}}
                           \right]}_{\color{red}{\text{JVP}}}.$$
@@ -2101,9 +2093,9 @@
                     class="result-video"
                     muted=""
                     playsinline=""
-                    poster="./media/results-20261103/lrhalf-poster.webp?v=math-axes1"
+                    poster="./media/results-20261103/lrhalf-poster.webp?v=no-shading1"
                     preload="none"
-                    src="./media/results-20261103/lrhalf.mp4?v=math-axes1"
+                    src="./media/results-20261103/lrhalf.mp4?v=no-shading1"
                   ></video>
                   <div class="caption">Figure 8a</div>
                 </figure>
@@ -2292,8 +2284,7 @@
                   <p>
                     Our final result is a demonstration of a sharpness schedule.
                     Bubbleforce equilibration is so fast that we can use LR and
-                    momentum knobs to trace any sharpness time series shape we
-                    want. The pathspring $\zeta$ follows the desired path. The
+                    momentum knobs to trace arbitrary sharpness time series shapes. The pathspring $\zeta$ follows the desired path. The
                     validation loss goes down.
                   </p>
                   <p>
@@ -2423,10 +2414,7 @@
                         >z</a
                       ></sup
                     >
-                    Herschel DIY'd his own ludicrous copper/tin mirrors for a
-                    hypermagnifying telescope, which peers correctly identified
-                    as $13\times$ more than the maximum useful magnification
-                    given atmospheric blur. Herschel slowly swept the night sky
+                    Herschel DIY'd his own ludicrous copper/tin mirrors for a hypermagnifying telescope.<sup class="footnote-ref" id="footnote-ref-herschel-magnification"><a aria-label="Footnote aa" href="#footnote-herschel-magnification">aa</a></sup> Herschel slowly swept the night sky
                     at $4.5\times$ higher magnification than anyone before, and
                     he spotted Uranus by coincidence. Assuming it was a comet,
                     Herschel used a focal length trick to confirm Uranus was not
@@ -2510,12 +2498,9 @@
               >
                 <div class="rendered">
                   <p>
-                    We suspect that most quantities governing good feature
-                    learning and good generalization are Uranuses. We suspect
-                    that pretraining theory is mostly made of Uranuses. Eldritch
+                    We suspect that pretraining theory is mostly made of Uranuses. Eldritch
                     fairies silently guide our models to victory, and their
-                    effects on the model are eldritch and invisible to our
-                    current methods. They are unknown unknowns to us and a
+                    effects on the model are invisible to our current methods. They are unknown unknowns to us and a
                     directed search for them is impossible.
                   </p>
                   <p>
@@ -2776,6 +2761,32 @@
                       4 shocks are applied to LR and momentum at update 2009.
                       Prior to update 2009 we use the reference implementation.
                     </p>
+<div class="method-table-wrap" tabindex="0" role="region" aria-label="nanoGPT Muon Baseline Hyperparameters">
+                    <table class="method-table"><caption>nanoGPT Muon Baseline Hyperparameters <a class="method-source" href="https://github.com/KellerJordan/modded-nanogpt/blob/452cc392f6af4f29834d1af64edeac55d1315397/records/track_3_optimization/train_gpt_simple.py#L248-L329">Source</a></caption>
+                    <thead><tr><th scope="col">Setting</th><th scope="col">Value</th></tr></thead>
+                    <tbody>
+                    <tr><th scope="row">Training data; sequence length</th><td class="ai-authored">FineWeb; 1,024 tokens</td></tr>
+                    <tr><th scope="row">Model</th><td class="ai-authored">12 layers; width 768; 6 attention heads; vocabulary 50,304</td></tr>
+                    <tr><th scope="row">Global batch; microbatch</th><td class="ai-authored">524,288 tokens; 64 sequences per GPU</td></tr>
+                    <tr><th scope="row">Training duration</th><td class="ai-authored">3,250 updates</td></tr>
+                    <tr><th scope="row">LR schedule</th><td class="ai-authored">Constant for 975 updates, then linear decay to zero over 2,275 updates</td></tr>
+                    <tr><th scope="row">Muon LR; weight decay</th><td class="ai-authored">$\eta=0.025$; $\gamma_{\mathrm{wd}}=0.05$</td></tr>
+                    <tr><th scope="row">Muon momentum</th><td class="ai-authored">Nesterov with $\beta=0.95$</td></tr>
+                    <tr><th scope="row">Newton–Schulz</th><td class="ai-authored">12 quintic iterations; coefficients $(2,-1.5,0.5)$</td></tr>
+                    <tr><th scope="row">AdamW LRs</th><td class="ai-authored">Embeddings 0.7; output projection 0.004; scalar parameters 0.015</td></tr>
+                    <tr><th scope="row">AdamW settings</th><td class="ai-authored">$\beta_1=0.8$, $\beta_2=0.95$; $\epsilon=10^{-10}$; weight decay 0.001</td></tr>
+                    <tr><th scope="row">Validation loss</th><td class="ai-authored">10,485,760 tokens; every 125 updates, every 25 in the final 10%, and at the endpoint</td></tr>
+                    </tbody></table></div>
+                    <div class="method-table-wrap" tabindex="0" role="region" aria-label="Shared Hyperparameter Shock Settings">
+                    <table class="method-table"><caption>Shared Hyperparameter Shock Settings</caption>
+                    <thead><tr><th scope="col">Setting</th><th scope="col">Value</th></tr></thead>
+                    <tbody>
+                    <tr><th scope="row">Pre-shock Muon LR; momentum</th><td class="ai-authored">$\eta=0.025$; Nesterov $\beta=0.95$</td></tr>
+                    <tr><th scope="row">Muon weight decay</th><td class="ai-authored">$\gamma_{\mathrm{wd}}=0.05$</td></tr>
+                    <tr><th scope="row">LR schedule</th><td class="ai-authored">Constant LR continuation instead of the baseline cooldown</td></tr>
+                    <tr><th scope="row">Shared checkpoint; first affected update</th><td class="ai-authored">2,009; 2,010</td></tr>
+                    <tr><th scope="row">Shared pathspring observations</th><td class="ai-authored">92 through update 2,009; sampled every 25 updates from 975 to 2,000</td></tr>
+                    </tbody></table></div>
                     <div
                       class="method-table-wrap"
                       tabindex="0"
@@ -2784,7 +2795,7 @@
                     >
                       <table class="method-table shock-settings">
                         <caption>
-                          What changes in each shock experiment
+                          Unique Hyperparameter Shock Settings
                         </caption>
                         <thead>
                           <tr>
@@ -2832,24 +2843,6 @@
                       update 2010.
                     </p>
                     <p>
-                      <strong>Prediction normalization.</strong> The main text
-                      gives $\zeta_{\mathrm{pred}}=\bubbleforce/\eta$. Training
-                      uses the sum of losses over $N=524{,}288$ tokens, but we
-                      measure pathspring using the average loss per token.
-                      Summing instead of averaging multiplies the Hessian by
-                      $N$. We therefore divide the prediction by $N$ to compare
-                      it with our measurements. Including weight decay gives
-                    </p>
-                    <p>
-                      $$\zeta_{\mathrm{pred}}=\frac{\bubbleforce}{N\eta}+\frac{\gamma_{\mathrm{wd}}}{N}.$$
-                    </p>
-                    <p>
-                      Here $\eta$ is the learning rate and
-                      $\gamma_{\mathrm{wd}}$ is the weight-decay coefficient. We
-                      compute bubbleforce from the optimizer's momentum kernel
-                      weights.
-                    </p>
-                    <p>
                       <strong>Lower envelope.</strong> For each candidate point
                       in the lower envelope, we look within 400 training steps
                       on either side, requiring at least 15 measurements in this
@@ -2864,13 +2857,7 @@
                       graphs. We do not use the lower envelope values to
                       establish equilibrium.
                     </p>
-                    <p>
-                      <strong>Red shading on our graphs.</strong> Red marks the
-                      observed progressive-sharpening interval after halving LR
-                      (updates 2010–3200), and the terminal rapid proportional
-                      LR decay in the baseline (2800–3249) and MaxEntSlop
-                      (2745–3059).
-                    </p>
+
                   </div>
                 </div>
               </section>
@@ -3569,16 +3556,16 @@
                     data-block="kernel-maxent"
                   >
                     <div class="rendered">
-                      <p class="ai-authored unit-sum-review">
+                      <p>
                         Given desired mean lag $\mathbb E[i]=\mu$, lag spread
                         $\mathbb E[\log(1+i)]=s$, and newest weights $\bar
                         c_0,\bar c_1$,
                         <a href="#ref-maxentslop">MaxEntSlop</a> solves:
                       </p>
-                      <p class="ai-authored unit-sum-review">
+                      <p>
                         $$\max_{c_0,\ldots,c_{255}\ge0}\;-\sum_i c_i\log c_i$$
                       </p>
-                      <p class="ai-authored unit-sum-review">
+                      <p>
                         $$\begin{align} \text{s.t.}\quad c_0&=\bar c_0,\quad
                         c_1=\bar c_1 \tag{newest-gradient weights}\\[-0.4em]
                         \sum_i c_i&=1 \tag{unit total weight}\\[-0.4em]
@@ -3594,11 +3581,11 @@
                       aria-label="MaxEntSlop and muon baseline momentum kernels synchronized with recorded validation loss"
                       muted=""
                       playsinline=""
-                      poster="./media/maxentslop-kernel-comparison.jpg?v=math-axes1"
+                      poster="./media/maxentslop-kernel-comparison.jpg?v=approved-colors1"
                       preload="none"
                     >
                       <source
-                        src="./media/maxentslop-kernel-comparison.mp4?v=math-axes1"
+                        src="./media/maxentslop-kernel-comparison.mp4?v=approved-colors1"
                         type="video/mp4"
                       />
                     </video>
@@ -5585,6 +5572,10 @@
                   You don't need to understand double stars because he failed.
                 </p>
               </div>
+            </div>
+            <div class="footnote marginal-note" data-anchor="footnote-ref-herschel-magnification" id="footnote-herschel-magnification">
+              <a class="note-number" aria-label="Back to footnote aa reference" href="#footnote-ref-herschel-magnification">aa</a>
+              <div><p>His peers correctly identified that Herschel was magnifying by $13\times$ more than the maximum useful magnification given atmospheric blur.</p></div>
             </div>
           </aside>
         </div>
