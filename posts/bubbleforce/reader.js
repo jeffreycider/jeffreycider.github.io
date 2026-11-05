@@ -74,24 +74,30 @@ function installVideoControls(video){
 }
 
 function installPlanetSlides(video){
- const clips=[[0,3.5],[3.5,9],[9,11.5]];let slide=0,raf=0,revision=0,loading=false;
+ const clips=[[0,3.5],[3.5,9],null];let slide=0,raf=0,revision=0,loading=false;
  const wrapper=document.createElement('div');wrapper.className='media-player planet-slides';video.before(wrapper);
  const head=document.createElement('div');head.className='planet-player-heading';head.innerHTML='<output class="slide-number" aria-live="polite">1 / 3</output><button type="button" class="media-fullscreen" aria-label="Fullscreen slideshow">⛶</button>';
  const bar=document.createElement('nav');bar.className='slide-controls';bar.setAttribute('aria-label','Uranus slides');bar.innerHTML='<button type="button" class="slide-prev" aria-label="Previous slide">◀ Prev</button><button type="button" class="slide-replay" aria-label="Replay current slide">↻ Replay</button><button type="button" class="slide-next" aria-label="Next slide">Next ▶</button>';
  const seekBar=document.createElement('div');seekBar.className='media-controls slide-seek';seekBar.innerHTML='<button type="button" class="media-play" aria-label="Play slide">Play</button><input class="media-seek" type="range" min="0" max="3.5" step="0.01" value="0" disabled aria-label="Seek within current slide"><output class="media-time"></output>';
- wrapper.append(head,video,seekBar,bar);
+ const still=document.createElement('img');still.className='planet-still';still.src=video.poster;still.alt='At 932× magnification, Uranus and Mars have grown 4.1×; the comparison star has grown much less.';still.hidden=true;
+ wrapper.append(head,video,still,seekBar,bar);
  const prev=bar.querySelector('.slide-prev'),next=bar.querySelector('.slide-next'),replay=bar.querySelector('.slide-replay'),play=seekBar.querySelector('.media-play'),seek=seekBar.querySelector('input');
  function update(){
+  const isStill=clips[slide]===null;
+  wrapper.classList.toggle('is-still',isStill);video.hidden=isStill;still.hidden=!isStill;seekBar.hidden=isStill;replay.hidden=isStill;
+  prev.disabled=slide===0;next.disabled=slide===clips.length-1;head.querySelector('.slide-number').textContent=(slide+1)+' / '+clips.length;
+  if(isStill)return;
   const[start,end]=clips[slide],at=Math.max(0,Math.min(end-start-.067,video.currentTime-start));
-  prev.disabled=slide===0;next.disabled=slide===clips.length-1;seek.disabled=loading||!Number.isFinite(video.duration);play.disabled=loading;
-  seek.max=end-start-.067;seek.value=at;head.querySelector('.slide-number').textContent=(slide+1)+' / '+clips.length;
+  seek.disabled=loading||!Number.isFinite(video.duration);play.disabled=loading;
+  seek.max=end-start-.067;seek.value=at;
   seekBar.querySelector('output').textContent=at.toFixed(1)+' / '+(end-start).toFixed(1)+'s';
   play.textContent=video.paused?'Play':'Pause';play.setAttribute('aria-label',video.paused?'Play slide':'Pause slide');
  }
- function stopAtBoundary(){if(!video.paused&&video.currentTime>=clips[slide][1]-.067){video.pause();video.currentTime=clips[slide][1]-.067}update()}
+ function stopAtBoundary(){if(clips[slide]===null){update();return}if(!video.paused&&video.currentTime>=clips[slide][1]-.067){video.pause();video.currentTime=clips[slide][1]-.067}update()}
  function watch(){cancelAnimationFrame(raf);stopAtBoundary();if(!video.paused)raf=requestAnimationFrame(watch)}
  async function start(index,restart){
-  const token=++revision;video.pause();slide=Math.max(0,Math.min(clips.length-1,index));loading=true;update();
+  const token=++revision;video.pause();slide=Math.max(0,Math.min(clips.length-1,index));loading=clips[slide]!==null;update();
+  if(clips[slide]===null)return;
   try{await prepareVideo(video);if(token!==revision)return;
    if(restart||video.currentTime<clips[slide][0]||video.currentTime>=clips[slide][1]-.09)video.currentTime=clips[slide][0];
    await video.play();

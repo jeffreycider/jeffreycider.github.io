@@ -392,3 +392,22 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 
 /* Keep the telescope illustration compact without cropping its slides. */
 #figure-11 .planet-slides:not(:fullscreen){max-width:360px;margin-inline:auto}
+
+/* The final Uranus slide is an image, with navigation but no playback controls. */
+.planet-slides [hidden]{display:none!important}
+.planet-still{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain}
+.planet-slides.is-still .slide-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+.planet-slides:fullscreen .planet-still{flex:1;min-height:0;max-height:calc(100vh - 130px)}
+
+/* A1: balance the baseline table against the two smaller shock tables and prose. */
+.a1-layout{display:grid;grid-template-columns:1.25fr 1fr;gap:22px;align-items:start;margin-top:20px}
+.a1-tile-column{min-width:0}
+.a1-layout .method-table-wrap{margin:0 0 20px;padding:15px}
+.a1-layout .method-table tbody th{width:36%}
+.a1-layout .shock-settings{min-width:0}
+.a1-layout .shock-settings tbody th{width:24%}
+.a1-layout .shock-settings th,.a1-layout .shock-settings td{padding:6px 5px 6px 0}
+.a1-layout .shock-settings td{white-space:nowrap}
+.a1-layout .method-table caption{font-size:16px}
+.a1-tile-column>p{margin:16px 0 0}
+@container(max-width:760px){.a1-layout{grid-template-columns:minmax(0,1fr);gap:20px}}

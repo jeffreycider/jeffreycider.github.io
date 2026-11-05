@@ -20,7 +20,7 @@
       type="image/svg+xml"
       sizes="any"
     />
-    <link href="./styles.css?v=annotations-a1-20261105" rel="stylesheet" />
+    <link href="./styles.css?v=still-tiled-a1-20261105" rel="stylesheet" />
     <script>
       window.MathJax = {
         loader: {
@@ -48,7 +48,7 @@
       };
     </script>
     <script defer="" src="./vendor/mathjax/tex-svg.js"></script>
-    <script defer="" src="reader.js?v=math-text-spacing1"></script>
+    <script defer="" src="reader.js?v=uranus-still3"></script>
   </head>
   <body>
     <main id="top">
@@ -246,7 +246,7 @@
                   playsinline=""
                   poster="./media/bubbleforce-summary-20261103-poster.webp?v=homeostasis3"
                   preload="none"
-                  src="./media/bubbleforce-summary-20261103.mp4?v=math-axes1"
+                  src="./media/bubbleforce-summary-20261103.mp4?v=pathspring-math2"
                 ></video>
               </figure>
               <section class="abstract" id="abstract">
@@ -2749,7 +2749,7 @@
                   data-block="runs-appendix"
                 >
                   <div class="rendered a1-methods">
-                    <p>
+<p>
                       The reference implementation is Konstantin Mishchenko’s
                       <a href="#ref-nanogpt-muon">nanoGPT Muon baseline</a>, in
                       Keller Jordan’s speedrunning harness. We test bubbleforce
@@ -2761,6 +2761,8 @@
                       4 shocks are applied to LR and momentum at update 2009.
                       Prior to update 2009 we use the reference implementation.
                     </p>
+<div class="a1-layout">
+<div class="a1-tile-column">
 <div class="method-table-wrap" tabindex="0" role="region" aria-label="nanoGPT Muon Baseline Hyperparameters">
                     <table class="method-table"><caption>nanoGPT Muon Baseline Hyperparameters <a class="method-source" href="https://github.com/KellerJordan/modded-nanogpt/blob/452cc392f6af4f29834d1af64edeac55d1315397/records/track_3_optimization/train_gpt_simple.py#L248-L329">Source</a></caption>
                     <thead><tr><th scope="col">Setting</th><th scope="col">Value</th></tr></thead>
@@ -2777,7 +2779,24 @@
                     <tr><th scope="row">AdamW settings</th><td class="ai-authored">$\beta_1=0.8$, $\beta_2=0.95$; $\epsilon=10^{-10}$; weight decay 0.001</td></tr>
                     <tr><th scope="row">Validation loss</th><td class="ai-authored">10,485,760 tokens; every 125 updates, every 25 in the final 10%, and at the endpoint</td></tr>
                     </tbody></table></div>
-                    <div class="method-table-wrap" tabindex="0" role="region" aria-label="Shared Hyperparameter Shock Settings">
+<p>
+                      <strong>Lower envelope.</strong> For each candidate point
+                      in the lower envelope, we look within 400 training steps
+                      on either side, requiring at least 15 measurements in this
+                      window. After accounting for the local trend, we find the
+                      lowest level around which measurements repeatedly cluster.
+                      To identify clusters, we let each measurement contribute
+                      to the count at nearby values, with its contribution
+                      fading over a scale of roughly 7% per step. We then select
+                      measurements approximately 16% below to 19% above the
+                      lowest cluster’s center. We connect their original values
+                      and show all measurements in the faint curve on our
+                      graphs. We do not use the lower envelope values to
+                      establish equilibrium.
+                    </p>
+</div>
+<div class="a1-tile-column">
+<div class="method-table-wrap" tabindex="0" role="region" aria-label="Shared Hyperparameter Shock Settings">
                     <table class="method-table"><caption>Shared Hyperparameter Shock Settings</caption>
                     <thead><tr><th scope="col">Setting</th><th scope="col">Value</th></tr></thead>
                     <tbody>
@@ -2787,7 +2806,7 @@
                     <tr><th scope="row">Shared checkpoint; first affected update</th><td class="ai-authored">2,009; 2,010</td></tr>
                     <tr><th scope="row">Shared pathspring observations</th><td class="ai-authored">92 through update 2,009; sampled every 25 updates from 975 to 2,000</td></tr>
                     </tbody></table></div>
-                    <div
+<div
                       class="method-table-wrap"
                       tabindex="0"
                       role="region"
@@ -2833,7 +2852,7 @@
                         </tbody>
                       </table>
                     </div>
-                    <p>
+<p>
                       <strong>Measurements.</strong> The six comparison panels
                       use the latest supplied checkpoint measurements, each
                       evaluated on 16,777,216 validation tokens. The four LR
@@ -2842,22 +2861,8 @@
                       25 steps from 975 to 2000. Each intervention begins at
                       update 2010.
                     </p>
-                    <p>
-                      <strong>Lower envelope.</strong> For each candidate point
-                      in the lower envelope, we look within 400 training steps
-                      on either side, requiring at least 15 measurements in this
-                      window. After accounting for the local trend, we find the
-                      lowest level around which measurements repeatedly cluster.
-                      To identify clusters, we let each measurement contribute
-                      to the count at nearby values, with its contribution
-                      fading over a scale of roughly 7% per step. We then select
-                      measurements approximately 16% below to 19% above the
-                      lowest cluster’s center. We connect their original values
-                      and show all measurements in the faint curve on our
-                      graphs. We do not use the lower envelope values to
-                      establish equilibrium.
-                    </p>
-
+</div>
+</div>
                   </div>
                 </div>
               </section>
