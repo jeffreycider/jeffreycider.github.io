@@ -332,3 +332,10 @@ body:not(.editing) [data-row-id="row-13"] [data-edit="pulse-text"]:has(>.rendere
 .qhm-escape-cases p:last-child,.qhm-boundary p:last-child{margin-bottom:0}
 .qhm-boundary{border-top:1px solid #c8b99f;padding-top:18px;margin-top:18px}
 @media(max-width:700px){.qhm-escape-cases{grid-template-columns:minmax(0,1fr)}.qhm-escape-case+.qhm-escape-case{border-left:0;border-top:1px solid #c8b99f;padding:18px 0 0}}
+
+/* Keep Example 5's casework compact without reducing its type size. */
+[data-block="heavyball-example"] .rendered p{margin-bottom:.45em}
+[data-block="heavyball-example"] .rendered mjx-container[display="true"]{margin:.35em 0!important;padding:2px 0;box-sizing:content-box}
+.qhm-escape-cases{margin:12px 0}
+.qhm-boundary{margin-top:12px;padding-top:12px}
+@media(max-width:700px){.qhm-escape-case+.qhm-escape-case{padding-top:12px}}
